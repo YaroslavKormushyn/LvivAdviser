@@ -19,10 +19,10 @@ namespace LvivAdviser.Domain.Entities
 
 		public string Email { get; set; }
 
-		[Index(IsUnique = true)]
 		public string Login { get; set; }
 
 		public string Password { get; set; }
+
 		public Role Role { get; set; }
 
 		public virtual IEnumerable<Rating> Ratings { get; set; }

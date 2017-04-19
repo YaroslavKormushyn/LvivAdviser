@@ -82,12 +82,23 @@
     <Compile Include="Entities\Content.cs" />
     <Compile Include="Entities\Rating.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Migrations\201704191950443_Initial.cs" />
+    <Compile Include="Migrations\201704191950443_Initial.Designer.cs">
+      <DependentUpon>201704191950443_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201704191950443_Initial.resx">
+      <DependentUpon>201704191950443_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
