@@ -1,26 +1,41 @@
 ﻿using LvivAdviser.Domain.Entities;
-using System;
-using System.Collections.Generic;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LvivAdviser.Domain.Abstract
 {
-	class AppDbContext : DbContext
+	public class AppDbContext : IdentityDbContext<User>
 	{
-		public AppDbContext() : base()
+		public AppDbContext() : base("LvivAdviser")
 		{
 		}
 
 		public DbSet<Content> Contents { get; set; }
 		public DbSet<Rating> Ratings { get; set; }
-		public DbSet<User> Users { get; set; }
 
-		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		static AppDbContext()
 		{
-			base.OnModelCreating(modelBuilder);
+			Database.SetInitializer<AppDbContext>(new IdentityDbInit());
+		}
+
+		public static AppDbContext Create()
+		{
+			return new AppDbContext();
+		}
+	}
+
+	public class IdentityDbInit
+		: DropCreateDatabaseIfModelChanges<AppDbContext>
+	{
+		protected override void Seed(AppDbContext context)
+		{
+			PerformInitialSetup(context);
+			base.Seed(context);
+		}
+		public void PerformInitialSetup(AppDbContext context)
+		{
+			// initial configuration will go here
 		}
 	}
 }
+

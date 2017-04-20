@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace LvivAdviser.Domain.Entities
 {
 	[Table("Rating")]
-	class Rating
+	public class Rating
 	{
 		[Key]
 		public int ID { get; set; }
@@ -13,7 +13,7 @@ namespace LvivAdviser.Domain.Entities
 		public string Comment { get; set; }
 
 		[ForeignKey("User")]
-		public int UserID { get; set; }
+		public string UserID { get; set; }
 
 		public User User { get; set; }
 

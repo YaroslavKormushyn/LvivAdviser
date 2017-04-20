@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LvivAdviser.Domain.Entities
 {
-	enum Type
+	public enum Type
 	{
 		Food= 1,
 		Rest = 2,
@@ -12,7 +12,7 @@ namespace LvivAdviser.Domain.Entities
 	}
 
 	[Table("Content")]
-	class Content
+	public class Content
 	{
 		[Key]
 		public int ID { get; set; }
