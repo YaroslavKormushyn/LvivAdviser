@@ -30,10 +30,10 @@ namespace LvivAdviser.WebUI.Infrastructure
 		{
             Mock<IContentRepository> mock = new Mock<IContentRepository>();
             mock.Setup(m => m.Content).Returns(new List<Content> {
-                    new Content { ID = 1, Type = LvivAdviser.Domain.Entities.Type.Food, Name = "Food", Description = "aaa", MainPhoto = null, Rating = 1 },
-                    new Content { ID = 2, Type = LvivAdviser.Domain.Entities.Type.Rest, Name = "Rest", Description = "bbb", MainPhoto = null, Rating = 1 },
-                    new Content { ID = 3, Type = LvivAdviser.Domain.Entities.Type.FreeTime, Name = "FreeTime", Description = "ccc", MainPhoto = null, Rating = 1 }
-                    });
+                new Content { ID = 1, Type = LvivAdviser.Domain.Entities.Type.Food, Name = "Food", Description = "aaa", MainPhoto = null, Rating = 1 },
+                new Content { ID = 2, Type = LvivAdviser.Domain.Entities.Type.Rest, Name = "Rest", Description = "bbb", MainPhoto = null, Rating = 2 },
+                new Content { ID = 3, Type = LvivAdviser.Domain.Entities.Type.FreeTime, Name = "FreeTime", Description = "ccc", MainPhoto = null, Rating = 3 }
+            });
             kernel.Bind<IContentRepository>().ToConstant(mock.Object);
         }
 	}

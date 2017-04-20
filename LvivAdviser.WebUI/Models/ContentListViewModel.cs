@@ -7,5 +7,6 @@ namespace LvivAdviser.WebUI.Models
     {
         public IEnumerable<Content> Contents { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public string CurrentType { get; set; }
     }
 }

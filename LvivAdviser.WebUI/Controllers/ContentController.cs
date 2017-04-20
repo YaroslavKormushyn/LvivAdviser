@@ -25,17 +25,18 @@ namespace LvivAdviser.WebUI.Controllers
             this.repository = contentRepository;
         }
 
-        public ViewResult List(int page = 1)
+        public ViewResult List(string type, int page = 1)
         {
             ContentListViewModel model = new ContentListViewModel
             {
-                Contents = repository.Content.OrderBy(p => p.ID).Skip((page - 1) * PageSize).Take(PageSize),
+                Contents = repository.Content.Where(p => type == null || p.Type.ToString() == type).OrderBy(p => p.ID).Skip((page - 1) * PageSize).Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Content.Count()
-                }
+                    TotalItems = type == null ? repository.Content.Count() : repository.Content.Where(e => e.Type.ToString() == type).Count()
+                },
+                CurrentType = type
             };
             return View(model);
         }
