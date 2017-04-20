@@ -1,8 +1,8 @@
-﻿using System;
+v﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ninject;
-namespace SportsStore.WebUI.Infrastructure
+namespace LvivAdviser.WebUI.Infrastructure
 {
 	public class NinjectDependencyResolver : IDependencyResolver
 	{
