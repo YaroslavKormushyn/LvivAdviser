@@ -1,15 +1,62 @@
-﻿@using LvivAdviser.Domain.Entities
-@{
-    Layout = null;
+﻿@{
+    ViewBag.Title = "HomePage";
 }
-<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    @Html.Partial("_StyleTemplate")
 </head>
+
 <body>
-    <div>
+    @Html.Partial("_GuestBar")
+
+    <div class="row centered">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h3>
+                We are happy to welcome you here!
+            </h3>
+            <br />
+            <p>
+                This site was created by a few students to help you to find your best emothions in this city.<br />
+                Feel free to surf on our creation! And have a nice time!
+            </p>
+        </div>
     </div>
+    <div id="headerwrap">
+    </div>
+
+    <br />
+
+    <div id="choise">
+        <div class="container">
+            <div class="row centered">
+                <h4>What you want to do next?</h4>
+                <div class="col-lg-4">
+                    <div class="tilt">
+                        <a href="#">
+                            <img src="~/Content/Coffee.jpg"
+                                 alt="To eat cheap and tasty food!" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="tilt">
+                        <a href="#">
+                            <img src="~/Content/Sleep.jpg"
+                                 alt="To relax and restore your energy!" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="tilt">
+                        <a href="#">
+                            <img src="~/Content/Popcorn.png"
+                                 alt="To find out, how to spend time!" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_ScriptTemplate")
 </body>
 </html>

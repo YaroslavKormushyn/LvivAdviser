@@ -111,7 +111,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Coffee.jpg" />
+    <Content Include="Content\HomePicture.jpg" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\Popcorn.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Sleep.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -156,6 +161,9 @@
     <Content Include="Views\Content\List.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Nav\Menu.cshtml" />
+    <Content Include="Views\Shared\_GuestBar.cshtml" />
+    <Content Include="Views\Shared\_ScriptTemplate.cshtml" />
+    <Content Include="Views\Shared\_StyleTemplate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

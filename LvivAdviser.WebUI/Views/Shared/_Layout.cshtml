@@ -6,12 +6,11 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
+    @Html.Partial("_StyleTemplate")
 </head>
 <body>
-    <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="#">Lviv Adviser</a>
-    </div>
-    <div class="row panel">
+    @Html.Partial("_GuestBar")
+    <br/><div class="row panel">
         <div id="types" class="col-xs-3">
            @Html.Action("Menu", "Nav")
         </div>
@@ -19,5 +18,6 @@
             @RenderBody()
         </div>
     </div>
+    @Html.Partial("_ScriptTemplate")
 </body>
 </html>
