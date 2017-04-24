@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ninject;
+using LvivAdviser.Domain.Abstract.Interfaces;
+using LvivAdviser.Domain.Abstract;
+using LvivAdviser.Domain.Entities;
 
 namespace LvivAdviser.WebUI.Infrastructure
 {
@@ -15,19 +18,23 @@ namespace LvivAdviser.WebUI.Infrastructure
 			AddBindings();
 		}
 
-		public object GetService(Type serviceType)
+		public object GetService(System.Type serviceType)
 		{
 			return kernel.TryGet(serviceType);
 		}
 
-		public IEnumerable<object> GetServices(Type serviceType)
+		public IEnumerable<object> GetServices(System.Type serviceType)
 		{
 			return kernel.GetAll(serviceType);
 		}
 
 		private void AddBindings()
 		{
-			// put bindings here
+			this.kernel.Bind<IRepository<Content>>()
+				.To<AppDbRepository<Content>>();
+
+			this.kernel.Bind<IRepository<Rating>>()
+				.To<AppDbRepository<Rating>>();
 		}
 	}
 }

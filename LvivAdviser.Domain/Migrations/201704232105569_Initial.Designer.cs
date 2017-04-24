@@ -13,7 +13,7 @@ namespace LvivAdviser.Domain.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201704201431104_Initial"; }
+            get { return "201704232105569_Initial"; }
         }
         
         string IMigrationMetadata.Source

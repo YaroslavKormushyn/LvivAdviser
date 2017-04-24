@@ -1,11 +1,10 @@
 ﻿using LvivAdviser.Domain.Abstract;
-using LvivAdviser.Domain.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
-namespace Users
+namespace LvivAdviser.WebUI
 {
 	public class IdentityConfig
 	{
@@ -13,6 +12,8 @@ namespace Users
 		{
 			app.CreatePerOwinContext<AppDbContext>(AppDbContext.Create);
 			app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
+			app.CreatePerOwinContext<AppRoleManager>(AppRoleManager.Create);
+
 			app.UseCookieAuthentication(new CookieAuthenticationOptions
 			{
 				AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,

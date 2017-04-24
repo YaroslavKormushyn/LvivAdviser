@@ -6,7 +6,7 @@ namespace LvivAdviser.Domain.Entities
 {
 	public enum Type
 	{
-		Food= 1,
+		Food = 1,
 		Rest = 2,
 		FreeTime = 3
 	}
@@ -27,6 +27,7 @@ namespace LvivAdviser.Domain.Entities
 		public string Description { get; set; }
 
 		public object MainPhoto { get; set; }
+
 		public decimal Rating { get; set; }
 
 		public virtual IEnumerable<Rating> Ratings { get; set; }

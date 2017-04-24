@@ -6,7 +6,7 @@ namespace LvivAdviser.Domain.Abstract
 {
 	public class AppDbContext : IdentityDbContext<User>
 	{
-		public AppDbContext() : base("LvivAdviser")
+		public AppDbContext() : base("name=LvivAdviserConnection")
 		{
 		}
 
@@ -25,17 +25,8 @@ namespace LvivAdviser.Domain.Abstract
 	}
 
 	public class IdentityDbInit
-		: DropCreateDatabaseIfModelChanges<AppDbContext>
+		: NullDatabaseInitializer<AppDbContext>
 	{
-		protected override void Seed(AppDbContext context)
-		{
-			PerformInitialSetup(context);
-			base.Seed(context);
-		}
-		public void PerformInitialSetup(AppDbContext context)
-		{
-			// initial configuration will go here
-		}
 	}
 }
 

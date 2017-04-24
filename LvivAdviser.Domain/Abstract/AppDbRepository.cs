@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace LvivAdviser.Domain.Abstract
 {
-	class AppDbRepository<T> : IRepository<T>
+	public class AppDbRepository<T> : IRepository<T>
 		where T : class 
 	{
 		private readonly AppDbContext context;

@@ -10,6 +10,7 @@ namespace LvivAdviser.Domain.Entities
 		public int ID { get; set; }
 
 		public int Rate { get; set; }
+
 		public string Comment { get; set; }
 
 		[ForeignKey("User")]

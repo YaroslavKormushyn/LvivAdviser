@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace LvivAdviser.Domain.Entities
-{	
-	[Table("User")]
+{
+	enum Role
+	{
+		User,
+		Moderator,
+		Administrator
+	}
+
 	public class User : IdentityUser
 	{
 		public virtual IEnumerable<Rating> Ratings { get; set; }

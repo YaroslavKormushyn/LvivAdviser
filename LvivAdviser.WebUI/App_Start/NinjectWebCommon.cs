@@ -5,11 +5,14 @@ namespace LvivAdviser.WebUI.App_Start
 {
     using System;
     using System.Web;
+    using System.Web.Mvc;
 
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+	using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
     using Ninject.Web.Common;
+
+	using LvivAdviser.WebUI.Infrastructure;
 
     public static class NinjectWebCommon 
     {
@@ -53,6 +56,8 @@ namespace LvivAdviser.WebUI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-        }        
+	        DependencyResolver.SetResolver(
+		        new NinjectDependencyResolver(kernel));
+		}        
     }
 }
