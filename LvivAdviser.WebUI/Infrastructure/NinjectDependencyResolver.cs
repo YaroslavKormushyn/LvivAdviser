@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LvivAdviser.Domain.Abstract;
+using LvivAdviser.Domain.Abstract.Interfaces;
+using LvivAdviser.Domain.Entities;
+
+using Ninject;
+
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Ninject;
-using LvivAdviser.Domain.Abstract.Interfaces;
-using LvivAdviser.Domain.Abstract;
-using LvivAdviser.Domain.Entities;
 
 namespace LvivAdviser.WebUI.Infrastructure
 {

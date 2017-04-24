@@ -1,9 +1,11 @@
 ﻿using LvivAdviser.Domain.Abstract;
 using LvivAdviser.Domain.Entities;
 using LvivAdviser.WebUI.Models;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;

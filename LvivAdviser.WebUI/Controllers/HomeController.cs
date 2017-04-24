@@ -1,19 +1,20 @@
-﻿using System.Web.Mvc;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using LvivAdviser.Domain.Abstract;
+using LvivAdviser.Domain.Entities;
+using LvivAdviser.Domain.Abstract.Interfaces;
 
-namespace Users.Controllers
+namespace LvivAdviser.WebUI.Controllers
 {
-	public class HomeController : Controller
-	{
-		[Authorize]
-		public ActionResult Index()
-		{
-			Dictionary<string, object> data
-				= new Dictionary<string, object>
-				{
-					{ "Placeholder", "Placeholder" }
-				};
-			return View(data);
-		}
-	}
+    public class HomeController : Controller
+    {
+        // GET: Home
+        public ViewResult Index()
+        {
+            return View();
+        }
+    }
 }
