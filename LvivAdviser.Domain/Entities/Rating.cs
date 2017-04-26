@@ -1,14 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LvivAdviser.Domain.Entities
 {
 	[Table("Rating")]
-	public class Rating
+	public class Rating : EntityBase
 	{
-		[Key]
-		public int ID { get; set; }
-
 		public int Rate { get; set; }
 
 		public string Comment { get; set; }

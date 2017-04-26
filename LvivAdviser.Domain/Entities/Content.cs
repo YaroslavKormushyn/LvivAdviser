@@ -12,11 +12,8 @@ namespace LvivAdviser.Domain.Entities
 	}
 
 	[Table("Content")]
-	public class Content
+	public class Content : EntityBase
 	{
-		[Key]
-		public int ID { get; set; }
-
 		[Required]
 		public Type Type { get; set; }
 
@@ -24,6 +21,7 @@ namespace LvivAdviser.Domain.Entities
 		public string Name { get; set; }
 
 		[Required]
+		[DataType(DataType.MultilineText)]
 		public string Description { get; set; }
 
 		public object MainPhoto { get; set; }

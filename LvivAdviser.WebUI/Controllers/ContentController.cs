@@ -28,7 +28,7 @@ namespace LvivAdviser.WebUI.Controllers
             {
                 Contents = repository.GetAll()
 					.Where(p => type == null || p.Type.ToString() == type)
-					.OrderBy(p => p.ID)
+					.OrderBy(p => p.Id)
 					.Skip((page - 1) * PageSize)
 					.Take(PageSize),
                 PagingInfo = new PagingInfo
