@@ -22,9 +22,11 @@ namespace LvivAdviser.Domain.Abstract
 		{
 			return new AppDbContext();
 		}
-	}
 
-	public class IdentityDbInit
+        public System.Data.Entity.DbSet<LvivAdviser.Domain.Abstract.Role> IdentityRoles { get; set; }
+    }
+
+    public class IdentityDbInit
 		: NullDatabaseInitializer<AppDbContext>
 	{
 	}

@@ -6,9 +6,9 @@ using System;
 
 namespace LvivAdviser.Domain.Abstract
 {
-	public class AppRoleManager : RoleManager<IdentityRole>, IDisposable
+	public class AppRoleManager : RoleManager<Role>, IDisposable
 	{
-		public AppRoleManager(RoleStore<IdentityRole> store)
+		public AppRoleManager(RoleStore<Role> store)
 			: base(store)
 		{
 		}
@@ -18,7 +18,7 @@ namespace LvivAdviser.Domain.Abstract
 			IOwinContext context)
 		{
 			return new AppRoleManager(new
-				RoleStore<IdentityRole>(context.Get<AppDbContext>()));
+				RoleStore<Role>(context.Get<AppDbContext>()));
 		}
 	}
 }
