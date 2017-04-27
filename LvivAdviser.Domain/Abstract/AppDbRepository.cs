@@ -119,8 +119,9 @@ namespace LvivAdviser.Domain.Abstract
 					dbEntry.MainPhoto = content.MainPhoto;
 					dbEntry.Ratings = content.Ratings;
 				}
-				context.SaveChanges();
+				
 			}
+			context.SaveChanges();
 		}
 
 		public Content DeleteContent(int Id)
