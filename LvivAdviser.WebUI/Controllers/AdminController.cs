@@ -34,8 +34,8 @@ namespace LvivAdviser.WebUI.Controllers
             {
                 repository.SaveContent(content);
                 //repository.Update(content);
-                TempData["message"] = string.Format("{0} has been saved",
-					content.Name);
+				//repository.Save();
+                TempData["message"] = $"{content.Name} has been saved";
                 return RedirectToAction("Index");
             }
             else
@@ -56,7 +56,7 @@ namespace LvivAdviser.WebUI.Controllers
             Content content = repository.DeleteContent(id);
             if (content != null)
             {
-                TempData["message"] = string.Format("{0} was deleted", content.Name);
+                TempData["message"] = $"{content.Name} was deleted";
             }
             return RedirectToAction("Index");
         }
