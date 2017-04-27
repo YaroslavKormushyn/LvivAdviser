@@ -1,3 +1,5 @@
+using static LvivAdviser.Domain.Entities.Type;
+
 namespace LvivAdviser.Domain.Migrations
 {
 	using LvivAdviser.Domain.Abstract;
@@ -9,72 +11,85 @@ namespace LvivAdviser.Domain.Migrations
 	using System.Data.Entity.Migrations;
 	using System.Linq;
 
-	internal sealed class Configuration : DbMigrationsConfiguration<LvivAdviser.Domain.Abstract.AppDbContext>
+	internal sealed class Configuration : DbMigrationsConfiguration<AppDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(LvivAdviser.Domain.Abstract.AppDbContext context)
+        protected override void Seed(AppDbContext context)
         {
             AppUserManager userMgr = new AppUserManager(new UserStore<User>(context));
             AppRoleManager roleMgr = new AppRoleManager(new RoleStore<IdentityRole>(context));
 
+			//Seed Content
 	        var contentList = new List<Content>
 	        {
 		        new Content
 		        {
-			        Id = 1,
-			        Name = "Black cat",
-			        Type = LvivAdviser.Domain.Entities.Type.Food,
-			        Description = "restaurant",
-			        MainPhoto = null,
-			        Rating = 5
+			        Name = "Black Cat",
+			        Type = Food,
+			        Description = "Restaurant",
+			        MainPhoto = null
 		        },
 		        new Content
 		        {
-			        Id = 2,
 			        Name = "Celentano",
-			        Type = LvivAdviser.Domain.Entities.Type.Food,
-			        Description = "restaurant",
-			        MainPhoto = null,
-			        Rating = 4
+			        Type = Food,
+			        Description = "Restaurant",
+			        MainPhoto = null
 		        },
 		        new Content
 		        {
-			        Id = 3,
 			        Name = "Da Vinci",
-			        Type = LvivAdviser.Domain.Entities.Type.Food,
-			        Description = "restaurant/pizza",
-			        MainPhoto = null,
-			        Rating = 4
+			        Type = Food,
+			        Description = "Restaurant/Pizza",
+			        MainPhoto = null
 		        },
 		        new Content
 		        {
-			        Id = 4,
-			        Name = "Kredense",
-			        Type = LvivAdviser.Domain.Entities.Type.Food,
-			        Description = "cafe",
-			        MainPhoto = null,
-			        Rating = 3
+			        Name = "Kredens",
+			        Type = Food,
+			        Description = "Cafe",
+			        MainPhoto = null
+		        },
+		        new Content
+		        {
+					Type = Rest,
+					Name = "Hotel \"Lviv\"",
+					Description = "Hotel",
+					MainPhoto = null
+		        },
+		        new Content
+		        {
+					Type = Rest,
+					Name = "Myroslav's Hostel",
+					Description = "Stay/B&B",
+					MainPhoto = null
+		        },
+		        new Content
+		        {
+					Type = FreeTime,
+					Name = "ArtFun",
+					Description = "Cafe/Leizure/Games",
+					MainPhoto = null
 		        }
-	        };
+			};
 	        context.Contents.AddRange(contentList);
 
 			string[] roleNames = 
 				Enum.GetNames(typeof(Entities.Role))
 				.Select(name => name + 's').ToArray();
-	        string adminRole = "Administrators";
-	        string adminName = "admin";
-	        string password = "MySecret";
-	        string email = "admin@example.com";
+
+			string adminRole = "Administrators";
 
 			if (!roleNames.Contains(adminRole))
 	        {
 		        roleNames.ToList().Add(adminRole);
 	        }
-	        
+			
+	        //Seed Roles
 	        foreach (var role in roleNames)
 	        {
 				if (!roleMgr.RoleExists(role))
@@ -83,7 +98,11 @@ namespace LvivAdviser.Domain.Migrations
 				}
 			}
 
-	        User user = userMgr.FindByName(adminName);
+	        string adminName = "admin";
+	        string password = "password";
+	        string email = "admin@example.com";
+
+			User user = userMgr.FindByName(adminName);
 	        if (user == null)
 	        {
 		        var ident = userMgr.Create(new User { UserName = adminName, Email = email },

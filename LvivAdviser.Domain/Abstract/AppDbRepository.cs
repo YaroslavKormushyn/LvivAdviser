@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using LvivAdviser.Domain.Entities;
 
 namespace LvivAdviser.Domain.Abstract
 {
+	[ExcludeFromCodeCoverage]
 	public class AppDbRepository<T> : IRepository<T>
 		where T : EntityBase, new()
 	{
