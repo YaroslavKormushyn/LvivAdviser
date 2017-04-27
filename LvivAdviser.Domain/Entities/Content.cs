@@ -14,14 +14,14 @@ namespace LvivAdviser.Domain.Entities
 	[Table("Content")]
 	public class Content : EntityBase
 	{
-		[Required]
+		[Required(ErrorMessage = "Please specify a type")]
 		public Type Type { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "Please enter a content name")]
 		public string Name { get; set; }
 
-		[Required]
 		[DataType(DataType.MultilineText)]
+		[Required(ErrorMessage = "Please enter a description")]
 		public string Description { get; set; }
 
 		public object MainPhoto { get; set; }
