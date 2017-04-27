@@ -20,10 +20,10 @@ namespace LvivAdviser.Domain.Migrations
 
         protected override void Seed(AppDbContext context)
         {
-            AppUserManager userMgr = new AppUserManager(new UserStore<User>(context));
-            AppRoleManager roleMgr = new AppRoleManager(new RoleStore<Abstract.Role>(context));
+	        AppUserManager userMgr = new AppUserManager(new UserStore<User>(context));
+	        AppRoleManager roleMgr = new AppRoleManager(new RoleStore<Abstract.Role>(context));
 
-			//Seed Content
+	        //Seed Content
 	        var contentList = new List<Content>
 	        {
 		        new Content
@@ -56,75 +56,81 @@ namespace LvivAdviser.Domain.Migrations
 		        },
 		        new Content
 		        {
-					Type = Rest,
-					Name = "Hotel \"Lviv\"",
-					Description = "Hotel",
-					MainPhoto = null
+			        Type = Rest,
+			        Name = "Hotel \"Lviv\"",
+			        Description = "Hotel",
+			        MainPhoto = null
 		        },
 		        new Content
 		        {
-					Type = Rest,
-					Name = "Myroslav's Hostel",
-					Description = "Stay/B&B",
-					MainPhoto = null
+			        Type = Rest,
+			        Name = "Myroslav's Hostel",
+			        Description = "Stay/B&B",
+			        MainPhoto = null
 		        },
 		        new Content
 		        {
-					Type = FreeTime,
-					Name = "ArtFun",
-					Description = "Cafe/Leizure/Games",
-					MainPhoto = null
+			        Type = FreeTime,
+			        Name = "ArtFun",
+			        Description = "Cafe/Leizure/Games",
+			        MainPhoto = null
 		        }
-			};
-	        context.Contents.AddRange(contentList);
+	        };
 
-			string[] roleNames = 
-				Enum.GetNames(typeof(Entities.Role))
-				.Select(name => name + 's').ToArray();
+	        foreach (var content in contentList)
+	        {
+		        if (!context.Contents.Any(cont => 
+					cont.Name == content.Name && cont.Type == content.Type))
+		        {
+			        context.Contents.Add(content);
+		        }
+	        }
 
-			string adminRole = "Administrators";
+	        string[] roleNames =
+		        Enum.GetNames(typeof(Entities.Role))
+			        .Select(name => name + 's').ToArray();
 
-			if (!roleNames.Contains(adminRole))
+	        string adminRole = "Administrators";
+
+	        if (!roleNames.Contains(adminRole))
 	        {
 		        roleNames.ToList().Add(adminRole);
 	        }
-			
+
 	        //Seed Roles
 	        foreach (var role in roleNames)
 	        {
-				if (!roleMgr.RoleExists(role))
-				{
-					roleMgr.Create(new Abstract.Role(role));
-				}
-			}
+		        if (!roleMgr.RoleExists(role))
+		        {
+			        roleMgr.Create(new Abstract.Role(role));
+		        }
+	        }
 
 	        string adminName = "admin";
 	        string password = "password";
 	        string email = "admin@example.com";
 
-			User user = userMgr.FindByName(adminName);
+	        User user = userMgr.FindByName(adminName);
 	        if (user == null)
 	        {
 		        var ident = userMgr.Create(new User { UserName = adminName, Email = email },
 			        password);
 		        if (!ident.Succeeded)
 		        {
-			        throw new Exception(ident.Errors.Aggregate((n, err) =>
-			        {
-				        return n + Environment.NewLine + err;
-			        }));
+			        throw new Exception(ident.Errors.Aggregate(
+						(n, err) => n + Environment.NewLine + err));
 		        }
 		        user = userMgr.FindByName(adminName);
 	        }
 
 	        if (!userMgr.IsInRole(
-				user.Id, 
-				adminRole))
+		        user.Id,
+		        adminRole))
 	        {
 		        userMgr.AddToRole(user.Id, adminRole);
 	        }
 
 	        context.SaveChanges();
-        }
+		}
     }
 }

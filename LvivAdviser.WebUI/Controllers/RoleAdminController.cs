@@ -3,7 +3,6 @@ using LvivAdviser.Domain.Entities;
 using LvivAdviser.WebUI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,7 +12,7 @@ using System.Web.Mvc;
 
 namespace LvivAdviser.WebUI.Controllers
 {
-    public class RoleAdminController : Controller
+	public class RoleAdminController : Controller
     {
         private AppUserManager UserManager
         {
@@ -35,6 +34,7 @@ namespace LvivAdviser.WebUI.Controllers
         {
             return View(RoleManager.Roles);
         }
+
         public ActionResult Create()
         {
             return View();
@@ -77,7 +77,7 @@ namespace LvivAdviser.WebUI.Controllers
             }
             else
             {
-                return View("Error", new string[] { "Role Not Found" });
+                return View("Error", new[] { "Role Not Found" });
             }
         }
 
@@ -95,6 +95,7 @@ namespace LvivAdviser.WebUI.Controllers
                 NonMembers = nonMembers
             });
         }
+
         [HttpPost]
         public async Task<ActionResult> Edit(RoleModificationModel model)
         {
@@ -122,6 +123,7 @@ namespace LvivAdviser.WebUI.Controllers
             }
             return View("Error", new string[] { "Role Not Found" });
         }
+
         private void AddErrorsFromResult(IdentityResult result)
         {
             foreach (string error in result.Errors)
