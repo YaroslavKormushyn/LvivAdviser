@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,14 +10,11 @@
 </head>
 <body>
     @Html.Partial("_GuestBar")
-    <br/><div class="row panel">
-        <div id="types" class="col-xs-3">
-           @Html.Action("Menu", "Nav")
+        <br/><div class="row panel">
+            <div class="col-xs-8">
+                @RenderBody()
+            </div>
         </div>
-        <div class="col-xs-8">
-            @RenderBody()
-        </div>
-    </div>
     @Html.Partial("_ScriptTemplate")
 </body>
 </html>
