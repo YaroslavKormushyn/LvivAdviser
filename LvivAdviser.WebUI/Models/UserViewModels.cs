@@ -51,4 +51,13 @@ namespace LvivAdviser.WebUI.Models
         public string[] IdsToAdd { get; set; }
         public string[] IdsToDelete { get; set; }
     }
+
+	public class CommentEditModel
+	{
+		public int CommentId { get; set; }
+		public string UserName { get; set; }
+
+		[Required(AllowEmptyStrings = false)]
+		public string Comment { get; set; }
+	}
 }

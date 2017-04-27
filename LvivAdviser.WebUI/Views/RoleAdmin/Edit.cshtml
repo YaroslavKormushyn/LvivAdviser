@@ -1,7 +1,11 @@
 ﻿@using LvivAdviser.Domain.Entities
 @using LvivAdviser.WebUI.Models
+
 @model RoleEditModel
-@{ ViewBag.Title = "Edit Role";}
+@{
+    ViewBag.Title = "Edit Role";
+}
+
 @Html.ValidationSummary()
 @using (Html.BeginForm())
 {

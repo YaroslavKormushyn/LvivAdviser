@@ -1,0 +1,31 @@
+﻿@model LvivAdviser.WebUI.Models.CommentEditModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "EditComment";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3>Edit Comment</h3>
+    </div>
+    @Html.BeginForm("EditComment", "Moderator")
+    {
+    @Html.HiddenFor(m => m.CommentId)
+    <div class="panel-body">
+        <div class="form-group">
+            <label>
+                User Name: @Model.UserName
+            </label>
+            <label>
+                Comment
+            </label>
+                @Html.TextArea(@Model.Comment, null, new { @class = "form-control", rows = 5 })
+                @Html.ValidationMessage(@Model.Comment)
+        </div>
+    </div>
+    <div class="panel-footer">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+    </div>
+    }
+</div>

@@ -148,11 +148,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Coffee.jpg" />
+    <Content Include="Content\ErrorStyles.css" />
     <Content Include="Content\HomePicture.jpg" />
     <Content Include="Content\main.css" />
     <Content Include="Content\Popcorn.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Sleep.jpg" />
+    <Content Include="Content\star.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
@@ -177,6 +179,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\ModeratorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
@@ -200,7 +203,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Content\List.cshtml" />
     <Content Include="Views\Home\Nav\Menu.cshtml" />
     <Content Include="Views\Nav\Menu.cshtml" />
     <Content Include="Views\Shared\_GuestBar.cshtml" />
@@ -208,13 +210,17 @@
     <Content Include="Views\Shared\_ScriptTemplate.cshtml" />
     <Content Include="Views\Shared\_StyleTemplate.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\RoleAdmin\Index.cshtml" />
     <Content Include="Views\RoleAdmin\Create.cshtml" />
     <Content Include="Views\RoleAdmin\Edit.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
+    <Content Include="Views\Admin\EditContent.cshtml" />
+    <Content Include="Views\Content\ViewContent.cshtml" />
+    <Content Include="Views\Shared\_ContentLayout.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml" />
+    <Content Include="Views\Moderator\EditComment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

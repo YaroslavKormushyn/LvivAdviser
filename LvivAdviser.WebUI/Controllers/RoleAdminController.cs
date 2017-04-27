@@ -72,12 +72,12 @@ namespace LvivAdviser.WebUI.Controllers
                 }
                 else
                 {
-                    return View("Error", result.Errors);
+                    return View("_Error", result.Errors);
                 }
             }
             else
             {
-                return View("Error", new[] { "Role Not Found" });
+                return View("_Error", new[] { "Role Not Found" });
             }
         }
 
@@ -107,7 +107,7 @@ namespace LvivAdviser.WebUI.Controllers
                     result = await UserManager.AddToRoleAsync(userId, model.RoleName);
                     if (!result.Succeeded)
                     {
-                        return View("Error", result.Errors);
+                        return View("_Error", result.Errors);
                     }
                 }
                 foreach (string userId in model.IdsToDelete ?? new string[] { })
@@ -116,12 +116,12 @@ namespace LvivAdviser.WebUI.Controllers
                     model.RoleName);
                     if (!result.Succeeded)
                     {
-                        return View("Error", result.Errors);
+                        return View("_Error", result.Errors);
                     }
                 }
                 return RedirectToAction("Index");
             }
-            return View("Error", new string[] { "Role Not Found" });
+            return View("_Error", new[] { "Role Not Found" });
         }
 
         private void AddErrorsFromResult(IdentityResult result)
