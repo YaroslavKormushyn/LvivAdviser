@@ -26,7 +26,7 @@ namespace LvivAdviser.Domain.Migrations
 	        //Seed Content
 	        var contentList = new List<Content>
 	        {
-		        new Content
+		         new Content
 		        {
 			        Name = "Black Cat",
 			        Type = Food,
@@ -68,13 +68,55 @@ namespace LvivAdviser.Domain.Migrations
 			        Description = "Stay/B&B",
 			        MainPhoto = null
 		        },
-		        new Content
-		        {
-			        Type = FreeTime,
-			        Name = "ArtFun",
-			        Description = "Cafe/Leizure/Games",
-			        MainPhoto = null
-		        }
+                new Content
+                {
+                    Name = "IMAX",
+                    Type = FreeTime,
+                    Description = "Cinema",
+                    MainPhoto = null
+                },
+                new Content
+                {
+                    Name = "Multiplex",
+                    Type = FreeTime,
+                    Description = "Cinema",
+                    MainPhoto = null
+                },
+                new Content
+                {
+                    Name = "Kinopalats",
+                    Type = FreeTime,
+                    Description = "Cinema",
+                    MainPhoto = null
+                },
+                new Content
+                {
+                    Name = "Medyk",
+                    Type = FreeTime,
+                    Description = "Icerink",
+                    MainPhoto = null
+                },
+                new Content
+                {
+                    Name = "Dnister",
+                    Type = Rest,
+                    Description = "Hotel",
+                    MainPhoto = null
+                },
+                new Content
+                {
+                    Name = "Atlas",
+                    Type = Rest,
+                    Description = "Hotel",
+                    MainPhoto = null
+                },
+                new Content
+                {
+                    Name = "Astoria",
+                    Type = Rest,
+                    Description = "Hotel",
+                    MainPhoto = null
+                }
 	        };
 
 	        foreach (var content in contentList)
