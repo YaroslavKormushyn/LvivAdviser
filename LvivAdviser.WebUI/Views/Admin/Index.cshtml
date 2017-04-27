@@ -16,6 +16,7 @@
 				<th class="text-center">Description</th>
 				<th class="text-center">MainPhoto</th>
 				<th class="text-center">Rating</th>
+				<th class="text-center">Ratings</th>
 				<th class="text-center">Actions</th>
 			</tr>
 			@foreach (var item in Model)
@@ -24,13 +25,14 @@
 					<td class="text-right">@item.Id</td>
 					<td class="text-center">@item.Type</td>
 					<td>
-						@Html.ActionLink(item.Name, "Edit", new {item.Id})
+						@Html.ActionLink(item.Name, "EditContent", new {item.Id})
 					</td>
 					<td class="text-center">@item.Description</td>
 					<td>@item.MainPhoto</td>
 				<td class="text-center">@item.Rating</td>
+				<td class="text-center">@item.Ratings</td>
 				<td class="text-center">
-					@using (Html.BeginForm("Delete", "Admin"))
+					@using (Html.BeginForm("DeleteContent", "Admin"))
 					{
 						@Html.Hidden("Id", item.Id)
 						<input type="submit"
@@ -43,7 +45,7 @@
 		</table>
 	</div>
 	<div class="panel-footer">
-		@Html.ActionLink("Add a new place", "Create", null,
+		@Html.ActionLink("Add a new place", "CreateContent", null,
 new { @class = "btn btn-default"  })
 	</div>
 </div>

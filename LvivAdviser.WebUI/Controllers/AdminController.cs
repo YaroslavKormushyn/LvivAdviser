@@ -21,14 +21,14 @@ namespace LvivAdviser.WebUI.Controllers
             return View(repository.GetAll());
         }
 
-        public ViewResult Edit(int Id)
+        public ViewResult EditContent(int Id)
         {
             Content content = repository.GetAll().FirstOrDefault(c => c.Id == Id);
             return View(content);
         }
 
         [HttpPost]
-        public ActionResult Edit(Content content)
+        public ActionResult EditContent(Content content)
         {
             if (ModelState.IsValid)
             {
@@ -45,13 +45,13 @@ namespace LvivAdviser.WebUI.Controllers
             }
         }
 
-        public ViewResult Create()
+        public ViewResult CreateContent()
         {
-            return View("Edit", new Content());
+            return View("EditContent", new Content());
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult DeleteContent(int id)
         {
             Content content = repository.DeleteContent(id);
             if (content != null)
