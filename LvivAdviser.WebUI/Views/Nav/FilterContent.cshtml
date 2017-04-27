@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<string>
 @Html.ActionLink(
     "Home",
-    "List",
+    "ViewContent",
     "Content",
     null,
     new
@@ -17,7 +17,7 @@
     @Html.RouteLink(link, new
     {
         controller = "Content",
-        action = "List",
+        action = "ViewContent",
         type = link,
         page = 1
     },
