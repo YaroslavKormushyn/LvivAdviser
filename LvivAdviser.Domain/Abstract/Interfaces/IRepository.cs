@@ -22,6 +22,8 @@ namespace LvivAdviser.Domain.Abstract.Interfaces
 		void Delete(TEntity entity);
 
 		void Update(TEntity entity);
+		void SaveContent(Content content);
+                Content DeleteContent(int contentId);	
 
 		int Save();
 		Task<int> SaveAsync();
