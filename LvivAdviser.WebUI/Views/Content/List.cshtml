@@ -1,75 +1,27 @@
-﻿@using LvivAdviser.WebUI.HtmlHelpers
+@using LvivAdviser.WebUI.HtmlHelpers
 @model LvivAdviser.WebUI.Models.ContentListViewModel
+
+@{
+    Layout = "~/Views/Shared/_ContentLayout.cshtml";
+    ViewBag.Title = "Content";
+}
 
 @foreach (var p in Model.Contents)
 {
-    if (@p.Type.ToString() == "Food")
-    {
-        {
-            ViewBag.Title = "Food";
-        }
-        <div class="well">
+    <div class="well">
         <h3>
             <strong>@p.Name</strong>
             <span class="pull-right label label-primary">
-                @p.Rating
+                <a href="#">
+                    <img src="~/Content/star.jpg" style="width:20px;height:25px;border:0"/>
+                    @p.Rating
+                </a>
             </span>
         </h3>
         <span class="lead"> @p.Description</span>
         @p.MainPhoto
     </div>
-    }
-    else if (@p.Type.ToString() == "Rest")
-    {
-        {
-            ViewBag.Title = "Rest";
-        }
-        <div class="well">
-            <h3>
-                <strong>@p.Name</strong>
-                <span class="pull-right label label-primary">
-                    @p.Rating
-                </span>
-            </h3>
-            <span class="lead"> @p.Description</span>
-            @p.MainPhoto
-        </div>
-    }
-    else if (@p.Type.ToString() == "FreeTime")
-    {
-        {
-            ViewBag.Title = "FreeTime";
-        }
-        <div class="well">
-            <h3>
-                <strong>@p.Name</strong>
-                <span class="pull-right label label-primary">
-                    @p.Rating
-                </span>
-            </h3>
-            <span class="lead"> @p.Description</span>
-            @p.MainPhoto
-        </div>
-    }
-    else
-    {
-        {
-            ViewBag.Title = "Content";
-        }
-        <div class="well">
-            <h3>
-                <strong>@p.Type</strong>
-                <strong>@p.Name</strong>
-                <span class="pull-right label label-primary">
-                    @p.Rating
-                </span>
-            </h3>
-            <span class="lead"> @p.Description</span>
-            @p.MainPhoto
-        </div>
-    }
 }
 <div class="btn-group pull-right">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, type = Model.CurrentType }))
 </div>
-
