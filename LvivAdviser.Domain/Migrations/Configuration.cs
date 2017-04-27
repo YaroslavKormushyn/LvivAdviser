@@ -19,7 +19,7 @@ namespace LvivAdviser.Domain.Migrations
         protected override void Seed(LvivAdviser.Domain.Abstract.AppDbContext context)
         {
             AppUserManager userMgr = new AppUserManager(new UserStore<User>(context));
-            AppRoleManager roleMgr = new AppRoleManager(new RoleStore<IdentityRole>(context));
+            AppRoleManager roleMgr = new AppRoleManager(new RoleStore<Abstract.Role>(context));
 
 	        var contentList = new List<Content>
 	        {
@@ -79,7 +79,7 @@ namespace LvivAdviser.Domain.Migrations
 	        {
 				if (!roleMgr.RoleExists(role))
 				{
-					roleMgr.Create(new IdentityRole(role));
+					roleMgr.Create(new Abstract.Role(role));
 				}
 			}
 
