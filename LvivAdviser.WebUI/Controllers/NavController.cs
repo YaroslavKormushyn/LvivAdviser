@@ -14,7 +14,7 @@ namespace LvivAdviser.WebUI.Controllers
         {
             repository = repo;
         }
-        public PartialViewResult Menu(string type = null)
+        public PartialViewResult FilterContent(string type = null)
         {
             ViewBag.SelectedType = type;
             IEnumerable<string> types = repository.GetAll()
