@@ -23,7 +23,7 @@ namespace LvivAdviser.Domain.Migrations
 
 	        var contentList = new List<Content>
 	        {
-		        new Content
+		         new Content
 		        {
 			        Id = 1,
 			        Name = "Black cat",
@@ -58,7 +58,70 @@ namespace LvivAdviser.Domain.Migrations
 			        Description = "cafe",
 			        MainPhoto = null,
 			        Rating = 3
-		        }
+		        },
+                new Content
+                {
+                    Id = 5,
+                    Name = "IMAX",
+                    Type = LvivAdviser.Domain.Entities.Type.FreeTime,
+                    Description = "cinema",
+                    MainPhoto = null,
+                    Rating = 5
+                },
+                new Content
+                {
+                    Id = 6,
+                    Name = "Multiplex",
+                    Type = LvivAdviser.Domain.Entities.Type.FreeTime,
+                    Description = "cinema",
+                    MainPhoto = null,
+                    Rating = 4
+                },
+                new Content
+                {
+                    Id = 7,
+                    Name = "Kinopalats",
+                    Type = LvivAdviser.Domain.Entities.Type.FreeTime,
+                    Description = "cinema",
+                    MainPhoto = null,
+                    Rating = 3
+                },
+                new Content
+                {
+                    Id = 8,
+                    Name = "Medyk",
+                    Type = LvivAdviser.Domain.Entities.Type.FreeTime,
+                    Description = "icerink",
+                    MainPhoto = null,
+                    Rating = 4
+                },
+                new Content
+                {
+                    Id = 9,
+                    Name = "Dnister",
+                    Type = LvivAdviser.Domain.Entities.Type.Rest,
+                    Description = "hotel",
+                    MainPhoto = null,
+                    Rating = 4
+                },
+                new Content
+                {
+                    Id = 10,
+                    Name = "Atlas",
+                    Type = LvivAdviser.Domain.Entities.Type.Rest,
+                    Description = "hotel",
+                    MainPhoto = null,
+                    Rating = 5
+                },
+                new Content
+                {
+                    Id = 11,
+                    Name = "Astoria",
+                    Type = LvivAdviser.Domain.Entities.Type.Rest,
+                    Description = "hotel",
+                    MainPhoto = null,
+                    Rating = 5
+                }
 	        };
 	        context.Contents.AddRange(contentList);
 
