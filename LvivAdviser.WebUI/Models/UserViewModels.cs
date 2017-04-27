@@ -22,12 +22,28 @@ namespace LvivAdviser.WebUI.Models
 		public string Password { get; set; }
 	}
 
+	public class SignUpModel
+	{
+		[Required(AllowEmptyStrings = false)]
+		public string Name { get; set; }
+
+		[Required(AllowEmptyStrings = false)]
+		public string Email { get; set; }
+
+		[Required(AllowEmptyStrings = false)]
+		public string Password { get; set; }
+
+		[Compare("Password", ErrorMessage = "Passwords do not match. Try again.")]
+		public string ConfirmPassword { get; set; }
+	}
+
     public class RoleEditModel
     {
         public Role Role { get; set; }
         public IEnumerable<User> Members { get; set; }
         public IEnumerable<User> NonMembers { get; set; }
     }
+
     public class RoleModificationModel
     {
         [Required]
