@@ -82,6 +82,38 @@ namespace LvivAdviser.Domain.Abstract
 		{
 			return context.SaveChanges();
 		}
+		public void SaveContent(Content content)
+		{
+		    if (content.Id == 0)
+		    {
+			context.Contents.Add(content);
+		    }
+		    else
+		    {
+			Content dbEntry = context.Contents.Find(content.Id);
+			if (dbEntry != null)
+			{
+			    dbEntry.Type = content.Type;
+			    dbEntry.Name = content.Name;
+			    dbEntry.Description = content.Description;
+			    dbEntry.MainPhoto = content.MainPhoto;
+			    dbEntry.Rating = content.Rating;
+			    dbEntry.Ratings = content.Ratings;
+			}
+			context.SaveChanges();
+           	    }
+		}
+			
+		public Content DeleteContent(int Id)
+		{
+		    Content dbEntry = context.Contents.Find(Id);
+		    if (dbEntry != null)
+		    {
+			context.Contents.Remove(dbEntry);
+			context.SaveChanges();
+		    }
+		    return dbEntry;
+		}
 
 		public Task<int> SaveAsync()
 		{
