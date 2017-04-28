@@ -18,6 +18,18 @@ namespace LvivAdviser.WebUI.Models
 		public string Password { get; set; }
 	}
 
+	public class EditModel
+	{
+		[Required]
+		public string Name { get; set; }
+
+		[Required]
+		public string Email { get; set; }
+
+		[Required]
+		public string Password { get; set; }
+	}
+
 	public class LoginModel
 	{
 		[Required]

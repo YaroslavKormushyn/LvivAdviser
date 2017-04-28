@@ -13,6 +13,7 @@ namespace LvivAdviser.Domain.Entities
 
 	public class User : IdentityUser
 	{
+		public virtual IEnumerable<Content> Bookmarks { get; set; }
 		public virtual IEnumerable<Rating> Ratings { get; set; }
 	}
 }
