@@ -1,15 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+
 using LvivAdviser.Domain.Abstract;
 using LvivAdviser.Domain.Entities;
+
 namespace LvivAdviser.WebUI.Models
 {
 	public class CreateModel
 	{
 		[Required]
 		public string Name { get; set; }
+
 		[Required]
 		public string Email { get; set; }
+
 		[Required]
 		public string Password { get; set; }
 	}
@@ -18,6 +22,7 @@ namespace LvivAdviser.WebUI.Models
 	{
 		[Required]
 		public string Name { get; set; }
+
 		[Required]
 		public string Password { get; set; }
 	}
@@ -55,6 +60,7 @@ namespace LvivAdviser.WebUI.Models
 	public class CommentEditModel
 	{
 		public int CommentId { get; set; }
+
 		public string UserName { get; set; }
 
 		[Required(AllowEmptyStrings = false)]

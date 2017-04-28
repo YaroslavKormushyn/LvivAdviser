@@ -10,7 +10,7 @@ namespace LvivAdviser.WebUI
 	{
 		public void Configuration(IAppBuilder app)
 		{
-			app.CreatePerOwinContext<AppDbContext>(AppDbContext.Create);
+			app.CreatePerOwinContext(AppDbContext.Create);
 			app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
 			app.CreatePerOwinContext<AppRoleManager>(AppRoleManager.Create);
 

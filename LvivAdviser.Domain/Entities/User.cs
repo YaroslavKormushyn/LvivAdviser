@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace LvivAdviser.Domain.Entities
 {
-	enum Role
+	internal enum Role
 	{
 		User,
-		Moderator,
+		UserModerator,
+		ContentModerator,
 		Administrator
 	}
 

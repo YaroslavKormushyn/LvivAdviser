@@ -1,4 +1,11 @@
-﻿using LvivAdviser.Domain.Abstract;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+
+using Castle.Core.Internal;
+
+using LvivAdviser.Domain.Abstract;
 using LvivAdviser.Domain.Entities;
 using LvivAdviser.WebUI.Models;
 
@@ -6,14 +13,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Castle.Core.Internal;
-using LvivAdviser.WebUI.Controllers;
-
-namespace Users.Controllers
+namespace LvivAdviser.WebUI.Controllers
 {
 	[Authorize]
 	public class AccountController : Controller
@@ -38,7 +38,7 @@ namespace Users.Controllers
 
 				if (user == null)
 				{
-					ModelState.AddModelError("", "Invalid name or password.");
+					ModelState.AddModelError("", @"Invalid name or password.");
 				}
 				else
 				{
@@ -131,26 +131,16 @@ namespace Users.Controllers
 
 		private void AddErrorsFromResult(IdentityResult result)
 		{
-			foreach (string error in result.Errors)
+			foreach (var error in result.Errors)
 			{
-				this.ModelState.AddModelError("", error);
+				ModelState.AddModelError("", error);
 			}
 		}
 
-		private IAuthenticationManager AuthManager
-		{
-			get
-			{
-				return HttpContext.GetOwinContext().Authentication;
-			}
-		}
+		private IAuthenticationManager AuthManager 
+			=> HttpContext.GetOwinContext().Authentication;
 
-		private AppUserManager UserManager
-		{
-			get
-			{
-				return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-			}
-		}
+		private AppUserManager UserManager 
+			=> HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
 	}
 }

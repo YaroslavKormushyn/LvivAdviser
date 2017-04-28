@@ -2,8 +2,8 @@ using static LvivAdviser.Domain.Entities.Type;
 
 namespace LvivAdviser.Domain.Migrations
 {
-	using LvivAdviser.Domain.Abstract;
-	using LvivAdviser.Domain.Entities;
+	using Abstract;
+	using Entities;
 	using Microsoft.AspNet.Identity;
 	using Microsoft.AspNet.Identity.EntityFramework;
 	using System;

@@ -1,4 +1,5 @@
-﻿using LvivAdviser.Domain.Abstract;
+﻿using System.Diagnostics.CodeAnalysis;
+using LvivAdviser.Domain.Abstract;
 using LvivAdviser.Domain.Abstract.Interfaces;
 using LvivAdviser.Domain.Entities;
 using LvivAdviser.WebUI.Models;
@@ -9,29 +10,30 @@ using System.Web.Mvc;
 
 namespace LvivAdviser.WebUI.Controllers
 {
-	[Authorize(Roles = "Moderators")]
+	[Authorize]
     public class ModeratorController : Controller
     {
-	    private readonly IRepository<Rating> ratingRepository;
+	    private readonly IRepository<Rating> _ratingRepository;
 
 	    public ModeratorController(IRepository<Rating> repository)
 	    {
-			ratingRepository = repository;
+			_ratingRepository = repository;
 	    }
 
 	    private AppUserManager UserManager
 		    => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-		
-	 //   [ExcludeFromCodeCoverage]
-		//public ActionResult Index()
-  //      {
-		//	return RedirectToAction(nameof(this.ViewContent));
-		//}
+
+		[ExcludeFromCodeCoverage]
+		public ActionResult Index()
+		{
+			return View();
+		}
 
 		[HttpGet]
+		[Authorize(Roles = "UserModerators")]
 	    public ViewResult ViewComments(int id)
 		{
-			var comments = ratingRepository
+			var comments = _ratingRepository
 				.GetAll()
 				.Where(comm => comm.Id == id);
 
@@ -39,9 +41,10 @@ namespace LvivAdviser.WebUI.Controllers
 		}
 
 	    [HttpGet]
+		[Authorize(Roles = "UserModerators")]
 	    public ViewResult EditComment(int id)
 	    {
-		    var comment = ratingRepository.GetById(id);
+		    var comment = _ratingRepository.GetById(id);
 			
 		    if (comment == null)
 		    {
@@ -56,16 +59,17 @@ namespace LvivAdviser.WebUI.Controllers
 	    }
 
 		[HttpPost]
+		[Authorize(Roles = "UserModerators")]
 	    public ActionResult EditComment(CommentEditModel model)
 	    {
 		    if (ModelState.IsValid)
 		    {
-			    var rating = ratingRepository.GetById(model.CommentId);
+			    var rating = _ratingRepository.GetById(model.CommentId);
 			    if (rating != null)
 			    {
 				    rating.Comment = model.Comment;
-					ratingRepository.Update(rating);
-				    var result = ratingRepository.Save();
+					_ratingRepository.Update(rating);
+				    var result = _ratingRepository.Save();
 				    if (result == 0)
 				    {
 					    return View("_Error");

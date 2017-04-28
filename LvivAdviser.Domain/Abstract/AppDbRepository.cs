@@ -15,49 +15,49 @@ namespace LvivAdviser.Domain.Abstract
 	public class AppDbRepository<T> : IRepository<T>
 		where T : EntityBase, new()
 	{
-		private readonly AppDbContext context;
-		private bool disposedValue;
-		private readonly DbSet<T> table;
+		private readonly AppDbContext _context;
+		private bool _disposedValue;
+		private readonly DbSet<T> _table;
 
 		public AppDbRepository(AppDbContext context)
 		{
-			this.context = context;
-			table = context.Set<T>();
+			_context = context;
+			_table = context.Set<T>();
 		}
 
 		public void Add(T entity)
 		{
-			table.Add(entity);
+			_table.Add(entity);
 		}
 
 		public void AddRange(IEnumerable<T> entities)
 		{
-			table.AddRange(entities);
+			_table.AddRange(entities);
 		}
 
 		public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
 		{
-			return table.Where(predicate);
+			return _table.Where(predicate);
 		}
 
 		public T GetById(int id)
 		{
-			return table.Find(id);
+			return _table.Find(id);
 		}
 
 		public IQueryable<T> GetAll()
 		{
-			return table;
+			return _table;
 		}
 
 		public void Remove(T entity)
 		{
-			table.Remove(entity);
+			_table.Remove(entity);
 		}
 
 		public void RemoveRange(IEnumerable<T> entities)
 		{
-			table.RemoveRange(entities);
+			_table.RemoveRange(entities);
 		}
 
 		public void Dispose()
@@ -67,87 +67,86 @@ namespace LvivAdviser.Domain.Abstract
 
 		public void Update(T entity)
 		{
-			table.Attach(entity);
-			context.Entry(entity).State = EntityState.Modified;
+			_table.Attach(entity);
+			_context.Entry(entity).State = EntityState.Modified;
 		}
 
 		public void Delete(int id)
 		{
-			T dbEntry = table.Find(id);
+			T dbEntry = _table.Find(id);
 			if (dbEntry != null)
 			{
-				table.Remove(dbEntry);
+				_table.Remove(dbEntry);
 			}
-			context.Entry(new T { Id = id }).State
+			_context.Entry(new T { Id = id }).State
 				= EntityState.Deleted;
 		}
 
 		public void Delete(T entity)
 		{
-			DbEntityEntry dbEntityEntry = context.Entry(entity);
+			DbEntityEntry dbEntityEntry = _context.Entry(entity);
 			if (dbEntityEntry.State != EntityState.Detached)
 			{
 				dbEntityEntry.State = EntityState.Deleted;
 			}
 			else
 			{
-				table.Attach(entity);
-				table.Remove(entity);
+				_table.Attach(entity);
+				_table.Remove(entity);
 			}
-			context.Entry(entity).State = EntityState.Deleted;
+			_context.Entry(entity).State = EntityState.Deleted;
 		}
 
 		public int Save()
 		{
-			return context.SaveChanges();
+			return _context.SaveChanges();
 		}
 
 		public void SaveContent(Content content)
 		{
 			if (content.Id == 0)
 			{
-				context.Contents.Add(content);
+				_context.Contents.Add(content);
 			}
 			else
 			{
-				Content dbEntry = context.Contents.Find(content.Id);
+				Content dbEntry = _context.Contents.Find(content.Id);
 				if (dbEntry != null)
 				{
 					dbEntry.Type = content.Type;
 					dbEntry.Name = content.Name;
 					dbEntry.Description = content.Description;
 					dbEntry.MainPhoto = content.MainPhoto;
-					dbEntry.Ratings = content.Ratings;
 				}
 				
 			}
-			context.SaveChanges();
+			_context.SaveChanges();
 		}
 
-		public Content DeleteContent(int Id)
+		public Content DeleteContent(int id)
 		{
-			Content dbEntry = context.Contents.Find(Id);
+			Content dbEntry = _context.Contents.Find(id);
 			if (dbEntry != null)
 			{
-				context.Contents.Remove(dbEntry);
-				context.SaveChanges();
+				_context.Contents.Remove(dbEntry);
+				_context.SaveChanges();
 			}
 			return dbEntry;
 		}
 
 		public Task<int> SaveAsync()
 		{
-			return context.SaveChangesAsync();
+			return _context.SaveChangesAsync();
 		}
 
 		protected virtual void Dispose(bool disposing)
 		{
-			if (!disposedValue)
+			if (!_disposedValue)
 			{
 				if (disposing)
 					Save();
 
-				disposedValue = true;
+				_disposedValue = true;
 			}
 		}
 	}

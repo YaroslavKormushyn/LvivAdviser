@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Web.Mvc;
 
 namespace LvivAdviser.Domain.Entities
 {
@@ -15,15 +16,10 @@ namespace LvivAdviser.Domain.Entities
 	[Table("Content")]
 	public class Content : EntityBase
 	{
-		public Content()
-		{
-			Ratings = new List<Rating>();	
-		}
-
-		[Required]
+		[Required(ErrorMessage = "Enter type")]
 		public Type Type { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "Enter name")] 
 		public string Name { get; set; }
 
 		[Required]
@@ -36,12 +32,13 @@ namespace LvivAdviser.Domain.Entities
 		public decimal Rating
 		{
 			get {
-				return Ratings.Count() == 0 
+				return !Ratings.Any() 
 					? 0 
 					: Ratings.Sum(rating => rating.Rate) / Ratings.Count();
 			}
 		}
 
-		public virtual IEnumerable<Rating> Ratings { get; set; }
+		[HiddenInput(DisplayValue = false)]
+		public virtual IEnumerable<Rating> Ratings { get; } = new List<Rating>();
 	}
 }

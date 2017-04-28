@@ -31,10 +31,10 @@ namespace LvivAdviser.WebUI.Infrastructure
 
 		private void AddBindings()
 		{
-			this.kernel.Bind<IRepository<Content>>()
+			kernel.Bind<IRepository<Content>>()
 				.To<AppDbRepository<Content>>();
 
-			this.kernel.Bind<IRepository<Rating>>()
+			kernel.Bind<IRepository<Rating>>()
 				.To<AppDbRepository<Rating>>();
 		}
 	}

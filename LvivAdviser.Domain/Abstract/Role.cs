@@ -4,7 +4,8 @@ namespace LvivAdviser.Domain.Abstract
 {
 	public class Role : IdentityRole
 	{
-		public Role() : base() { }
+		public Role()
+		{ }
 
 		public Role(string name) : base(name) { }
 	}

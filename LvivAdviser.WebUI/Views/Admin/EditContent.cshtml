@@ -11,6 +11,7 @@
 	{
 		<div class="panel-body">
 			@Html.HiddenFor(m => m.Id)
+		   <!--Html.HiddenFor(m => m.Ratings)--> 
 			@foreach (var property in ViewData.ModelMetadata.Properties)
 			{
 				if (property.PropertyName != "Id")

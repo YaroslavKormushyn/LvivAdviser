@@ -17,15 +17,16 @@ namespace LvivAdviser.Domain.Abstract
 			IOwinContext context)
 		{
 			AppDbContext db = context.Get<AppDbContext>();
-			AppUserManager manager = new AppUserManager(new UserStore<User>(db));
-
-			manager.PasswordValidator = new CustomPasswordValidator
+			AppUserManager manager = new AppUserManager(new UserStore<User>(db))
 			{
-				RequiredLength = 6,
-				RequireNonLetterOrDigit = false,
-				RequireDigit = false,
-				RequireLowercase = true,
-				RequireUppercase = true
+				PasswordValidator = new CustomPasswordValidator
+				{
+					RequiredLength = 6,
+					RequireNonLetterOrDigit = false,
+					RequireDigit = false,
+					RequireLowercase = true,
+					RequireUppercase = true
+				}
 			};
 
 			manager.UserValidator = new CustomUserValidator(manager)

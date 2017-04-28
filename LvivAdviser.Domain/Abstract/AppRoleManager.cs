@@ -2,13 +2,12 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using System;
 
 namespace LvivAdviser.Domain.Abstract
 {
-	public class AppRoleManager : RoleManager<Role>, IDisposable
+	public class AppRoleManager : RoleManager<Role>
 	{
-		public AppRoleManager(RoleStore<Role> store)
+		public AppRoleManager(IRoleStore<Role, string> store)
 			: base(store)
 		{
 		}
