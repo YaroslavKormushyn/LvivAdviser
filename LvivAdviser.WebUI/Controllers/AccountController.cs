@@ -10,14 +10,17 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Castle.Core.Internal;
+using LvivAdviser.WebUI.Controllers;
 
 namespace Users.Controllers
 {
 	[Authorize]
 	public class AccountController : Controller
 	{
+		[HttpGet]
 		[AllowAnonymous]
-		public ActionResult Login(string returnUrl)
+		public ActionResult LogIn(string returnUrl)
 		{
 			ViewBag.returnUrl = returnUrl;
 			return View();
@@ -26,12 +29,13 @@ namespace Users.Controllers
 		[HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Login(LoginModel details, string returnUrl)
+		public async Task<ActionResult> LogIn(LoginModel details, string returnUrl)
 		{
 			if (ModelState.IsValid)
 			{
 				User user = await UserManager.FindAsync(details.Name,
 					details.Password);
+
 				if (user == null)
 				{
 					ModelState.AddModelError("", "Invalid name or password.");
@@ -40,11 +44,19 @@ namespace Users.Controllers
 				{
 					ClaimsIdentity ident = await UserManager.CreateIdentityAsync(user,
 						DefaultAuthenticationTypes.ApplicationCookie);
+
 					AuthManager.SignOut();
 					AuthManager.SignIn(new AuthenticationProperties
 					{
 						IsPersistent = false
 					}, ident);
+
+					if (returnUrl.IsNullOrEmpty())
+					{
+						return RedirectToAction(
+							nameof(HomeController.Index), "Home");
+					}
+
 					return Redirect(returnUrl);
 				}
 			}
@@ -53,10 +65,76 @@ namespace Users.Controllers
 		}
 
 		[Authorize]
-		public ActionResult Logout()
+		public ActionResult LogOut()
 		{
 			AuthManager.SignOut();
 			return RedirectToAction("Index", "Home");
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		public ActionResult SignUp()
+		{
+			if (User.Identity.IsAuthenticated)
+			{
+				return RedirectToAction(
+					nameof(HomeController.Index), "Home");
+			}
+			return View();
+		}
+
+		[HttpPost]
+		[AllowAnonymous]
+		public async Task<ActionResult> SignUp(SignUpModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var user = new User
+				{
+					UserName = model.Name,
+					Email = model.Email
+				};
+
+				var result = await UserManager.CreateAsync(
+					user, model.Password);
+
+				if (result.Succeeded)
+				{
+					result = await UserManager.AddToRoleAsync(
+						user.Id, "Users");
+
+					if (result.Succeeded)
+					{
+						var ident = await UserManager.CreateIdentityAsync(
+							user, DefaultAuthenticationTypes.ApplicationCookie);
+
+						AuthManager.SignOut();
+						AuthManager.SignIn(
+							new AuthenticationProperties
+							{
+								IsPersistent = true
+							},
+							ident);
+
+						return RedirectToAction(
+							nameof(HomeController.Index), "Home");
+					}
+
+					await UserManager.DeleteAsync(user);
+				}
+
+				AddErrorsFromResult(result);
+			}
+
+			return View(model);
+		}
+
+		private void AddErrorsFromResult(IdentityResult result)
+		{
+			foreach (string error in result.Errors)
+			{
+				this.ModelState.AddModelError("", error);
+			}
 		}
 
 		private IAuthenticationManager AuthManager

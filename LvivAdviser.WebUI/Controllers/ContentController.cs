@@ -22,7 +22,7 @@ namespace LvivAdviser.WebUI.Controllers
             this.repository = contentRepository;
         }
 
-        public ViewResult List(string type, int page = 1)
+        public ViewResult ViewContent(string type, int page = 1)
         {
             ContentListViewModel model = new ContentListViewModel
             {

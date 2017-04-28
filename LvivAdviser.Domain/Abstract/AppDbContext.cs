@@ -1,6 +1,11 @@
-﻿using LvivAdviser.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using LvivAdviser.Domain.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using System.Linq;
+using Microsoft.AspNet.Identity;
+using Type = LvivAdviser.Domain.Entities.Type;
 
 namespace LvivAdviser.Domain.Abstract
 {
@@ -22,9 +27,11 @@ namespace LvivAdviser.Domain.Abstract
 		{
 			return new AppDbContext();
 		}
-	}
 
-	public class IdentityDbInit
+        public System.Data.Entity.DbSet<Role> IdentityRoles { get; set; }
+    }
+
+    public class IdentityDbInit
 		: NullDatabaseInitializer<AppDbContext>
 	{
 	}

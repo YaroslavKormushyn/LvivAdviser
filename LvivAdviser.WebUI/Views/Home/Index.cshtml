@@ -2,8 +2,6 @@
     ViewBag.Title = "HomePage";
 }
 
-<body>
-
     <div class="row centered">
         <div >
             <h3>
@@ -28,26 +26,19 @@
                     
                 <div class="col-md-3">
                     <div class="tilt">
-                        <a href="@Url.Action("List", "ContentController")">
-                            <img src="#"
-                                 alt="To eat cheap and tasty food!" />
-                        </a>
+                        @Html.ActionLink("To eat cheap and tasty food!", "ViewContent", "Content", null, null)
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="tilt">
-                        <a href="@Url.Action("List", "ContentController")">
-                            <span>To relax and restore your energy!</span>
-                    </a>
+                        @Html.ActionLink("To relax and restore your energy!", "ViewContent", "Content", null, null)
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="tilt">
-                        @Html.ActionLink("To find out, how to spend time!", "List", "Content", null, null)
+                        @Html.ActionLink("To find out, how to spend time!", "ViewContent", "Content", null, null)
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-</body>

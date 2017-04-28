@@ -10,11 +10,13 @@ namespace LvivAdviser.WebUI.Controllers
 	public class NavController : Controller
     {
         private IRepository<Content> repository;
+
         public NavController(IRepository<Content> repo)
         {
             repository = repo;
         }
-        public PartialViewResult Menu(string type = null)
+
+        public PartialViewResult FilterContent(string type = null)
         {
             ViewBag.SelectedType = type;
             IEnumerable<string> types = repository.GetAll()

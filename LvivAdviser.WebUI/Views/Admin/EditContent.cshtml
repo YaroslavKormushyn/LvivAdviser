@@ -1,4 +1,4 @@
-﻿@model LvivAdviser.Domain.Entities.Content
+@model LvivAdviser.Domain.Entities.Content
 @{
 	ViewBag.Title = "Admin: Edit " + @Model.Name;
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -7,13 +7,13 @@
 	<div class="panel-heading">
 		<h3>Edit @Model.Name</h3>
 	</div>
-	@using (Html.BeginForm())
+	@using (Html.BeginForm("EditContent", "Admin"))
 	{
 		<div class="panel-body">
 			@Html.HiddenFor(m => m.Id)
 			@foreach (var property in ViewData.ModelMetadata.Properties)
 			{
-				if (property.PropertyName != "ID")
+				if (property.PropertyName != "Id")
 				{
 					<div class="form-group">
 						<label>
@@ -27,6 +27,7 @@
 						{
 							@Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
 						}
+						@Html.ValidationMessage(property.PropertyName)
 					</div>
 				}
 			}

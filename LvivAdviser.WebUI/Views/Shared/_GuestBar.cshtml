@@ -10,8 +10,12 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Log In</a></li>
-                <li><a href="#">Sign Up</a></li>
+                <li>
+                    @Html.ActionLink("Log In", "LogIn", "Account", null, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Sign Up", "SignUp", "Account", null, null)
+                </li>
             </ul>
         </div>
     </div>
