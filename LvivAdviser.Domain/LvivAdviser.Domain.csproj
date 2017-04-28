@@ -124,6 +124,10 @@
     <Compile Include="Migrations\201704271519323_ContentImageByteArray.Designer.cs">
       <DependentUpon>201704271519323_ContentImageByteArray.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704282034490_UserBudget.cs" />
+    <Compile Include="Migrations\201704282034490_UserBudget.Designer.cs">
+      <DependentUpon>201704282034490_UserBudget.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704271519323_ContentImageByteArray.resx">
       <DependentUpon>201704271519323_ContentImageByteArray.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704282034490_UserBudget.resx">
+      <DependentUpon>201704282034490_UserBudget.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

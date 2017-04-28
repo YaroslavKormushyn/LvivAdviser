@@ -41,7 +41,7 @@ namespace LvivAdviser.WebUI.Controllers
 				UserManager.FindById(User.Identity.GetUserId());
 
 			currUser.Ratings.AsQueryable().Load();
-			currUser.Bookmarks.AsQueryable().Load();
+			currUser.Favourites.AsQueryable().Load();
 
 			return View(new EditModel
 			{

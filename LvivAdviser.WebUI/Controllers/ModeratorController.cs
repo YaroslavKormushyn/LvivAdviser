@@ -23,11 +23,11 @@ namespace LvivAdviser.WebUI.Controllers
 	    private AppUserManager UserManager
 		    => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
 
-		[ExcludeFromCodeCoverage]
-		public ActionResult Index()
-		{
-			return View();
-		}
+		//[ExcludeFromCodeCoverage]
+		//public ActionResult Index()
+		//{
+		//	return View();
+		//}
 
 		[HttpGet]
 		[Authorize(Roles = "UserModerators")]

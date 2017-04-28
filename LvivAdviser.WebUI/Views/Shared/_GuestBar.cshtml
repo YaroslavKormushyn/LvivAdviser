@@ -16,6 +16,10 @@
                 <li>
                     @Html.ActionLink("Sign Up", "SignUp", "Account", null, null)
                 </li>
+                @if (@User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Log Out", "Logout", "Account", null, null)</li>
+                }
             </ul>
         </div>
     </div>

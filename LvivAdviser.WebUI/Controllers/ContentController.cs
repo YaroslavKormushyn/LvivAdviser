@@ -9,24 +9,24 @@ namespace LvivAdviser.WebUI.Controllers
 {
 	public class ContentController : Controller
     {
-        // GET: Content
-        public ActionResult Index()
-        {
-            return View();
-        }
-        private IRepository<Content> repository;
-        public int PageSize = 4;
+		private IRepository<Content> _repository;
+	    public int PageSize = 4;
 
-        public ContentController(IRepository<Content> contentRepository)
-        {
-            this.repository = contentRepository;
-        }
+	    public ContentController(IRepository<Content> contentRepository)
+	    {
+		    this._repository = contentRepository;
+	    }
 
+		public ActionResult Index()
+        {
+            return RedirectToActionPermanent(nameof(ViewContent));
+        }
+        
         public ViewResult ViewContent(string type, int page = 1)
         {
             ContentListViewModel model = new ContentListViewModel
             {
-                Contents = repository.GetAll()
+                Contents = _repository.GetAll()
 					.Where(p => type == null || p.Type.ToString() == type)
 					.OrderBy(p => p.Id)
 					.Skip((page - 1) * PageSize)
@@ -36,10 +36,10 @@ namespace LvivAdviser.WebUI.Controllers
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
                     TotalItems = type == null 
-					? repository.GetAll().Count() 
-					: repository.GetAll()
-						.Where(e => e.Type.ToString() == type)
-						.Count()
+					? _repository.GetAll().Count() 
+					: _repository
+						.GetAll()
+						.Count(e => e.Type.ToString() == type)
                 },
                 CurrentType = type
             };

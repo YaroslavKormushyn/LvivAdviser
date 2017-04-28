@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace LvivAdviser.Domain.Entities
 {
@@ -13,7 +15,11 @@ namespace LvivAdviser.Domain.Entities
 
 	public class User : IdentityUser
 	{
-		public virtual IEnumerable<Content> Bookmarks { get; set; }
+		[Range(0.0, double.PositiveInfinity)]
+		[DefaultValue(0.0)]
+		public decimal Budget { get; set; }
+
+		public virtual IEnumerable<Content> Favourites { get; set; }
 		public virtual IEnumerable<Rating> Ratings { get; set; }
 	}
 }
