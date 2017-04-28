@@ -2,16 +2,10 @@
     ViewBag.Title = "HomePage";
 }
 
-<html>
-<head>
-    @Html.Partial("_StyleTemplate")
-</head>
-
 <body>
-    @Html.Partial("_GuestBar")
 
     <div class="row centered">
-        <div class="col-lg-8 col-lg-offset-2">
+        <div >
             <h3>
                 We are happy to welcome you here!
             </h3>
@@ -31,33 +25,29 @@
         <div class="container">
             <div class="row centered">
                 <h4>What you want to do next?</h4>
-                <div class="col-lg-4">
+                    
+                <div class="col-md-3">
                     <div class="tilt">
-                        <a href="#">
-                            <img src="~/Content/Coffee.jpg"
+                        <a href="@Url.Action("List", "ContentController")">
+                            <img src="#"
                                  alt="To eat cheap and tasty food!" />
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-md-3">
                     <div class="tilt">
-                        <a href="#">
-                            <img src="~/Content/Sleep.jpg"
-                                 alt="To relax and restore your energy!" />
-                        </a>
+                        <a href="@Url.Action("List", "ContentController")">
+                            <span>To relax and restore your energy!</span>
+                    </a>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-md-3">
                     <div class="tilt">
-                        <a href="#">
-                            <img src="~/Content/Popcorn.png"
-                                 alt="To find out, how to spend time!" />
-                        </a>
+                        @Html.ActionLink("To find out, how to spend time!", "List", "Content", null, null)
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @Html.Partial("_ScriptTemplate")
+
 </body>
-</html>
