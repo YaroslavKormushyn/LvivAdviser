@@ -61,3 +61,7 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+LvivAdviser.WebUI/Content/* linguist-vendored
+LvivAdviser.WebUI/Scripts/* linguist-vendored
+LvivAdviser.WebUI/fonts/* linguist-vendored
