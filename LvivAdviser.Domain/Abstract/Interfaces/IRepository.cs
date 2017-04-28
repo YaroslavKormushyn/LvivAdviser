@@ -4,6 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
+using LvivAdviser.Domain.Entities;
+
 namespace LvivAdviser.Domain.Abstract.Interfaces
 {
 	public interface IRepository<TEntity> : IDisposable 
@@ -22,6 +24,8 @@ namespace LvivAdviser.Domain.Abstract.Interfaces
 		void Delete(TEntity entity);
 
 		void Update(TEntity entity);
+		void SaveContent(Content content);
+                Content DeleteContent(int contentId);	
 
 		int Save();
 		Task<int> SaveAsync();

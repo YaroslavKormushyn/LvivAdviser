@@ -12,21 +12,13 @@ namespace LvivAdviser.Domain.Abstract
 
 		public DbSet<Content> Contents { get; set; }
 		public DbSet<Rating> Ratings { get; set; }
-
-		static AppDbContext()
-		{
-			Database.SetInitializer<AppDbContext>(new IdentityDbInit());
-		}
+		public DbSet<Role> IdentityRoles { get; set; }
 
 		public static AppDbContext Create()
 		{
 			return new AppDbContext();
 		}
-	}
 
-	public class IdentityDbInit
-		: NullDatabaseInitializer<AppDbContext>
-	{
-	}
+    }
 }
 

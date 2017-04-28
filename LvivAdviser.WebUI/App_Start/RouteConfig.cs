@@ -9,6 +9,11 @@ namespace LvivAdviser.WebUI
         {
 	        routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                "Default",
+                "{controller}/{action}/{id}",
+                new { area = "", controller = "Home", action = "Index", id = UrlParameter.Optional });
+
 	        routes.MapRoute(null, "", new { controller = "Content", action = "ViewContent", type = (string)null, page = 1 });
 
 	        routes.MapRoute(null, "Page{page}", new { controller = "Content", action = "ViewContent", type = (string)null }, new { page = @"\d+" });
@@ -18,12 +23,6 @@ namespace LvivAdviser.WebUI
 	        routes.MapRoute(null, "{type}/Page{page}", new { controller = "Content", action = "ViewContent" }, new { page = @"\d+" });
 
 	        routes.MapRoute(null, "{controller}/{action}");
-
-			routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
         }
     }
 }

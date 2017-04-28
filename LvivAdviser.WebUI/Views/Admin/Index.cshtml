@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LvivAdviser.Domain.Entities.Content>
+@model IEnumerable<LvivAdviser.Domain.Entities.Content>
 @{
 	ViewBag.Title = "Admin: All Places";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -24,15 +24,15 @@
 					<td class="text-right">@item.Id</td>
 					<td class="text-center">@item.Type</td>
 					<td>
-						@Html.ActionLink(item.Name, "Edit", new {item.Id})
+						@Html.ActionLink(item.Name, "EditContent", new {item.Id})
 					</td>
 					<td class="text-center">@item.Description</td>
 					<td>@item.MainPhoto</td>
 				<td class="text-center">@item.Rating</td>
 				<td class="text-center">
-					@using (Html.BeginForm("Delete", "Admin"))
+					@using (Html.BeginForm("DeleteContent", "Admin"))
 					{
-						@Html.Hidden("ID", item.Id)
+						@Html.Hidden("Id", item.Id)
 						<input type="submit"
 							   class="btn btn-default btn-xs"
 							   value="Delete" />
@@ -43,7 +43,7 @@
 		</table>
 	</div>
 	<div class="panel-footer">
-		@Html.ActionLink("Add a new place", "Create", null,
+		@Html.ActionLink("Add a new place", "CreateContent", null,
 new { @class = "btn btn-default"  })
 	</div>
 </div>

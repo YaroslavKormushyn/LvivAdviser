@@ -1,24 +1,16 @@
 ﻿@{
-    ViewBag.Title = "HomePage";
+    ViewBag.Title = "Home Page";
 }
 
-<html>
-<head>
-    @Html.Partial("_StyleTemplate")
-</head>
-
-<body>
-    @Html.Partial("_GuestBar")
-
     <div class="row centered">
-        <div class="col-lg-8 col-lg-offset-2">
+        <div >
             <h3>
                 We are happy to welcome you here!
             </h3>
             <br />
             <p>
-                This site was created by a few students to help you to find your best emothions in this city.<br />
-                Feel free to surf on our creation! And have a nice time!
+                This site was created by a few students to help you experience your best emotions in this city.<br />
+                Feel free to surf on our creation and have a nice time!
             </p>
         </div>
     </div>
@@ -27,37 +19,26 @@
 
     <br />
 
-    <div id="choise">
+    <div id="choice">
         <div class="container">
             <div class="row centered">
-                <h4>What you want to do next?</h4>
-                <div class="col-lg-4">
+                <h4>What you want, mate?</h4>
+                    
+                <div class="col-md-3">
                     <div class="tilt">
-                        <a href="#">
-                            <img src="~/Content/Coffee.jpg"
-                                 alt="To eat cheap and tasty food!" />
-                        </a>
+                        @Html.ActionLink("Eat cheap - get cancer!", "ViewContent", "Content", null, null)
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-md-3">
                     <div class="tilt">
-                        <a href="#">
-                            <img src="~/Content/Sleep.jpg"
-                                 alt="To relax and restore your energy!" />
-                        </a>
+                        @Html.ActionLink("Get relaxed and get bitches!", "ViewContent", "Content", null, null)
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-md-3">
                     <div class="tilt">
-                        <a href="#">
-                            <img src="~/Content/Popcorn.png"
-                                 alt="To find out, how to spend time!" />
-                        </a>
+                        @Html.ActionLink("Spend time and get crippling depression!", "ViewContent", "Content", null, null)
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @Html.Partial("_ScriptTemplate")
-</body>
-</html>

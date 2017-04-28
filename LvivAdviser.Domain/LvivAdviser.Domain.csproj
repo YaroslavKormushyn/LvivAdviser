@@ -72,6 +72,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -103,6 +104,7 @@
     <Compile Include="Abstract\AppUserManager.cs" />
     <Compile Include="Abstract\CustomPasswordValidator.cs" />
     <Compile Include="Abstract\CustomUserValidator.cs" />
+    <Compile Include="Abstract\ImageConverter.cs" />
     <Compile Include="Abstract\Interfaces\IRepository.cs" />
     <Compile Include="Abstract\AppDbRepository.cs" />
     <Compile Include="Abstract\Role.cs" />
@@ -117,6 +119,14 @@
     <Compile Include="Migrations\201704261223104_EntityBase.cs" />
     <Compile Include="Migrations\201704261223104_EntityBase.Designer.cs">
       <DependentUpon>201704261223104_EntityBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704271519323_ContentImageByteArray.cs" />
+    <Compile Include="Migrations\201704271519323_ContentImageByteArray.Designer.cs">
+      <DependentUpon>201704271519323_ContentImageByteArray.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704282034490_UserBudget.cs" />
+    <Compile Include="Migrations\201704282034490_UserBudget.Designer.cs">
+      <DependentUpon>201704282034490_UserBudget.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +145,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704261223104_EntityBase.resx">
       <DependentUpon>201704261223104_EntityBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704271519323_ContentImageByteArray.resx">
+      <DependentUpon>201704271519323_ContentImageByteArray.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704282034490_UserBudget.resx">
+      <DependentUpon>201704282034490_UserBudget.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,4 @@
-@model IEnumerable<string>
+﻿@model IEnumerable<string>
 @Html.ActionLink(
     "Home",
     "ViewContent",
@@ -15,15 +15,15 @@
 @foreach (var link in Model)
 {
     @Html.RouteLink(link, new
-{
-    controller = "Content",
-    action = "ViewContent",
-    type = link,
-    page = 1
-},
+    {
+        controller = "Content",
+        action = "ViewContent",
+        type = link,
+        page = 1
+    },
         new
         {
-            @class = "btn btn-block btn-default btn-lg" +
+            @class = "btn btn-block btn-default btn-lg" + 
                 (link == ViewBag.SelectedType ? " btn-primary" : "")
         })
 }
