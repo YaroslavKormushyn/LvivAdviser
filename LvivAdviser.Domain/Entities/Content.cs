@@ -40,5 +40,7 @@ namespace LvivAdviser.Domain.Entities
 
 		[HiddenInput(DisplayValue = false)]
 		public virtual IEnumerable<Rating> Ratings { get; } = new List<Rating>();
+
+		public ICollection<User> FavouritedByUsers { get; set; } = new List<User>();
 	}
 }

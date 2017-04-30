@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using LvivAdviser.Domain.Abstract;
-using LvivAdviser.Domain.Entities;
-using LvivAdviser.Domain.Abstract.Interfaces;
+﻿using System.Web.Mvc;
 
 namespace LvivAdviser.WebUI.Controllers
 {
-    public class HomeController : Controller
+	public class HomeController : Controller
     {
         // GET: Home
         public ViewResult Index()

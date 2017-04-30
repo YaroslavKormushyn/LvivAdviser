@@ -18,7 +18,6 @@ namespace LvivAdviser.Domain.Abstract
 		{
 			return new AppDbContext();
 		}
-
-    }
+	}
 }
 

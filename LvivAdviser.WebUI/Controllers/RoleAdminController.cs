@@ -51,10 +51,7 @@ namespace LvivAdviser.WebUI.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    AddErrorsFromResult(result);
-                }
+	            AddErrorsFromResult(result);
             }
             return View(name);
         }
@@ -70,10 +67,7 @@ namespace LvivAdviser.WebUI.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    return View("_Error", result.Errors);
-                }
+	            return View("_Error", result.Errors);
             }
             else
             {
@@ -85,9 +79,11 @@ namespace LvivAdviser.WebUI.Controllers
         {
             Role role =  await RoleManager.FindByIdAsync(id);
             string[] memberIDs = role.Users.Select(x => x.UserId).ToArray();
-            IEnumerable<User> members
-            = UserManager.Users.Where(x => memberIDs.Any(y => y == x.Id));
+            IEnumerable<User> members = 
+				UserManager.Users
+				.Where(x => memberIDs.Any(y => y == x.Id));
             IEnumerable<User> nonMembers = UserManager.Users.Except(members);
+
             return View(new RoleEditModel
             {
                 Role = role,
@@ -99,10 +95,10 @@ namespace LvivAdviser.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(RoleModificationModel model)
         {
-            IdentityResult result;
-            if (ModelState.IsValid)
+	        if (ModelState.IsValid)
             {
-                foreach (string userId in model.IdsToAdd ?? new string[] { })
+	            IdentityResult result;
+	            foreach (string userId in model.IdsToAdd ?? new string[] { })
                 {
                     result = await UserManager.AddToRoleAsync(userId, model.RoleName);
                     if (!result.Succeeded)

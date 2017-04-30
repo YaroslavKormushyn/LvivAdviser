@@ -10,17 +10,33 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    @Html.ActionLink("Log In", "LogIn", "Account", null, null)
-                </li>
-                <li>
-                    @Html.ActionLink("Sign Up", "SignUp", "Account", null, null)
-                </li>
-                @if (@User.Identity.IsAuthenticated)
+                @if (!@User.Identity.IsAuthenticated)
                 {
-                    <li>@Html.ActionLink("Log Out", "Logout", "Account", null, null)</li>
+                    <li>
+                        @Html.ActionLink("Log In", "LogIn", "Account", null, null)
+                    </li>
+                    <li>
+                        @Html.ActionLink("Sign Up", "SignUp", "Account", null, null)
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        @Html.ActionLink("Log Out", "Logout", "Account", null, null)
+                    </li>
+                    <li>
+                        @Html.ActionLink("Profile", "Index", "User", null, null)
+                    </li>
                 }
             </ul>
         </div>
+        @if (TempData.ContainsKey("Message"))
+        {
+            <div class="alert alert-success">@TempData["Message"]</div>
+        }
+        @if (TempData.ContainsKey("Error"))
+        {
+            <div class="alert alert-danger">@TempData["Error"]</div>              
+        }
     </div>
 </div>

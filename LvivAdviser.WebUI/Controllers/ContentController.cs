@@ -14,7 +14,7 @@ namespace LvivAdviser.WebUI.Controllers
 
 	    public ContentController(IRepository<Content> contentRepository)
 	    {
-		    this._repository = contentRepository;
+		    _repository = contentRepository;
 	    }
 
 		public ActionResult Index()

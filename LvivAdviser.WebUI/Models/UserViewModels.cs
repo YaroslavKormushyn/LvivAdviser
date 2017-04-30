@@ -21,12 +21,17 @@ namespace LvivAdviser.WebUI.Models
 	public class EditModel
 	{
 		[Required]
+		public string Id { get; set; }
+
+		[Required(AllowEmptyStrings = false)]
 		public string Name { get; set; }
 
-		[Required]
+		[Required(AllowEmptyStrings = false)]
 		public string Email { get; set; }
 
 		[Required]
+		public decimal Budget { get; set; }
+
 		public string Password { get; set; }
 	}
 
@@ -69,13 +74,24 @@ namespace LvivAdviser.WebUI.Models
         public string[] IdsToDelete { get; set; }
     }
 
+	public class RatingEditModel
+	{
+		public int RatingId { get; set; }
+
+		public string UserId{ get; set; }
+		public int ContentId { get; set; }
+
+		[Required]
+		public int Rating { get; set; }
+
+		public string Comment { get; set; }
+	}
+
 	public class CommentEditModel
 	{
+		public string UserName { get; set; }
 		public int CommentId { get; set; }
 
-		public string UserName { get; set; }
-
-		[Required(AllowEmptyStrings = false)]
 		public string Comment { get; set; }
 	}
 }

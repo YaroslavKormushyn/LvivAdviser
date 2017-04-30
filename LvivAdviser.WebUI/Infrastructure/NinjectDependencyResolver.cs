@@ -6,6 +6,8 @@ using Ninject;
 
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Ninject.Web.Common;
 
 namespace LvivAdviser.WebUI.Infrastructure
 {
@@ -31,11 +33,17 @@ namespace LvivAdviser.WebUI.Infrastructure
 
 		private void AddBindings()
 		{
+			//kernel.Bind<AppDbContext>()
+			//	.ToSelf()
+			//	.InRequestScope();
+
 			kernel.Bind<IRepository<Content>>()
-				.To<AppDbRepository<Content>>();
+				.To<AppDbRepository<Content>>();;
+				//.InRequestScope();
 
 			kernel.Bind<IRepository<Rating>>()
 				.To<AppDbRepository<Rating>>();
+			//.InRequestScope();
 		}
 	}
 }

@@ -128,6 +128,10 @@
     <Compile Include="Migrations\201704282034490_UserBudget.Designer.cs">
       <DependentUpon>201704282034490_UserBudget.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704301838141_Favourites.cs" />
+    <Compile Include="Migrations\201704301838141_Favourites.Designer.cs">
+      <DependentUpon>201704301838141_Favourites.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -151,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704282034490_UserBudget.resx">
       <DependentUpon>201704282034490_UserBudget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704301838141_Favourites.resx">
+      <DependentUpon>201704301838141_Favourites.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
