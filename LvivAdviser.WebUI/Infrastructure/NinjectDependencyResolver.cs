@@ -33,17 +33,17 @@ namespace LvivAdviser.WebUI.Infrastructure
 
 		private void AddBindings()
 		{
-			//kernel.Bind<AppDbContext>()
-			//	.ToSelf()
-			//	.InRequestScope();
+			kernel.Bind<AppDbContext>()
+				.ToSelf()
+				.InRequestScope();
 
 			kernel.Bind<IRepository<Content>>()
-				.To<AppDbRepository<Content>>();;
-				//.InRequestScope();
+				.To<AppDbRepository<Content>>()
+				.InRequestScope();
 
 			kernel.Bind<IRepository<Rating>>()
-				.To<AppDbRepository<Rating>>();
-			//.InRequestScope();
+				.To<AppDbRepository<Rating>>()
+				.InRequestScope();
 		}
 	}
 }
