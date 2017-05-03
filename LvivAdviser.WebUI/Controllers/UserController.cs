@@ -106,7 +106,7 @@ namespace LvivAdviser.WebUI.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult AddRating(int id)
+		public ViewResult AddRating(int id)
 		{
 			var content = _content.GetById(id);
 			if (content == null)

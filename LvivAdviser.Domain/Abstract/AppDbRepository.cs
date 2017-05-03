@@ -143,8 +143,8 @@ namespace LvivAdviser.Domain.Abstract
 		{
 			if (!_disposedValue)
 			{
-				if (disposing)
-					Save();
+				//if (disposing)
+				//	Save();
 
 				_disposedValue = true;
 			}
