@@ -17,8 +17,8 @@ namespace LvivAdviser.WebUI.Controllers
 	[Authorize(Roles = "Users")]
     public class UserController : Controller
 	{
-		private IRepository<Content> _content;
-		private IRepository<Rating> _ratings;
+		private readonly IRepository<Content> _content;
+		private readonly IRepository<Rating> _ratings;
 
 		public UserController(
 			IRepository<Content> content, 

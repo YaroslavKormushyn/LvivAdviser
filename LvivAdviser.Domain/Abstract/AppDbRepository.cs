@@ -16,7 +16,6 @@ namespace LvivAdviser.Domain.Abstract
 		where T : EntityBase, new()
 	{
 		private readonly AppDbContext _context;
-		private bool _disposedValue;
 		private readonly DbSet<T> _table;
 
 		public AppDbRepository(AppDbContext context)
@@ -58,11 +57,6 @@ namespace LvivAdviser.Domain.Abstract
 		public void RemoveRange(IEnumerable<T> entities)
 		{
 			_table.RemoveRange(entities);
-		}
-
-		public void Dispose()
-		{
-			Dispose(true);
 		}
 
 		public void Update(T entity)
@@ -137,17 +131,6 @@ namespace LvivAdviser.Domain.Abstract
 		public Task<int> SaveAsync()
 		{
 			return _context.SaveChangesAsync();
-		}
-
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!_disposedValue)
-			{
-				//if (disposing)
-				//	Save();
-
-				_disposedValue = true;
-			}
 		}
 	}
 }
