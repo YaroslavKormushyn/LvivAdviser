@@ -19,6 +19,7 @@ namespace LvivAdviser.WebUI.Controllers
 	{
 		private readonly IRepository<Content> _content;
 		private readonly IRepository<Rating> _ratings;
+		private AppUserManager _userManager;
 
 		public UserController(
 			IRepository<Content> content, 
@@ -28,8 +29,12 @@ namespace LvivAdviser.WebUI.Controllers
 			_ratings = ratings;
 		}
 
-		private AppUserManager UserManager 
-			=> HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+		public AppUserManager UserManager
+		{
+			get => _userManager ?? 
+				HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+			set => _userManager = value;
+		}
 
 		[HttpGet]
         public ActionResult Index()
@@ -163,6 +168,34 @@ namespace LvivAdviser.WebUI.Controllers
 			return RedirectToAction("ViewContent", "Content");
 		}
 
+		public ActionResult AddComment(int id, string comment)
+		{
+			var rating = _ratings.GetById(id);
+			if (rating.UserId != User.Identity.GetUserId())
+			{
+				return View("_Error", new[] { "Cannot add comments from others." });
+			}
+			rating.Comment = comment;
+			_ratings.Update(rating);
+			_ratings.Save();
+
+			return RedirectToAction("Index", "Home");
+		}
+
+		public ActionResult EditComment(int id, string comment)
+		{
+			var rating = _ratings.GetById(id);
+			if (rating.UserId != User.Identity.GetUserId())
+			{
+				return View("_Error", new[] { "Cannot edit comments from others." });
+			}
+			rating.Comment = comment;
+			_ratings.Update(rating);
+			_ratings.Save();
+
+			return RedirectToAction("Index", "Home");
+		}
+
 		public ActionResult RemoveComment(int id)
 		{
 			var rating = _ratings.GetById(id);
@@ -170,7 +203,7 @@ namespace LvivAdviser.WebUI.Controllers
 			{
 				return View("_Error", new[] {"Cannot remove comments from others."});
 			}
-			rating.Comment = string.Empty;
+			rating.Comment = null;
 			_ratings.Update(rating);
 			_ratings.Save();
 
