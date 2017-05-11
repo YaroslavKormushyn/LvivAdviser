@@ -1,13 +1,13 @@
 @model LvivAdviser.Domain.Entities.Content
 @{
-	ViewBag.Title = "Moderator: Edit " + @Model.Name;
-	Layout = "~/Views/Shared/_ModeratorLayout.cshtml";
+	ViewBag.Title = "ContentModerator: Edit " + @Model.Name;
+	Layout = "~/Views/Shared/_ContentModeratorLayout.cshtml";
 }
 <div class="panel">
 	<div class="panel-heading">
 		<h3>Edit @Model.Name</h3>
 	</div>
-	@using (Html.BeginForm("EditContent", "Moderator"))
+	@using (Html.BeginForm("EditContent", "ContentModerator"))
 	{
 		<div class="panel-body">
 			@Html.HiddenFor(m => m.Id)
@@ -39,3 +39,4 @@
 		</div>
 	}
 </div>
+
