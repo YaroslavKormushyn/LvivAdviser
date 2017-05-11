@@ -1,7 +1,7 @@
 @model IEnumerable<LvivAdviser.Domain.Entities.Content>
 @{
-	ViewBag.Title = "Moderator: All Places";
-	Layout = "~/Views/Shared/_ModeratorLayout.cshtml";
+	ViewBag.Title = "ContentModerator: All Places";
+	Layout = "~/Views/Shared/_ContentModeratorLayout.cshtml";
 }
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -28,7 +28,7 @@
 					<td class="text-center">@item.Description</td>
 					<td>@item.MainPhoto</td>
 				<td class="text-center">
-					@using (Html.BeginForm("DeleteContent", "Moderator"))
+					@using (Html.BeginForm("DeleteContent", "ContentModerator"))
 					{
 						@Html.Hidden("Id", item.Id)
 					    @Html.Hidden("Ratings", item.Ratings)
@@ -46,3 +46,4 @@
 new { @class = "btn btn-default"  })
 	</div>
 </div>
+
