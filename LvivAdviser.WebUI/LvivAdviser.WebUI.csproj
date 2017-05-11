@@ -234,20 +234,19 @@
     <Content Include="Views\Content\ViewContent.cshtml" />
     <Content Include="Views\Shared\_ContentLayout.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
-    <Content Include="Views\Moderator\EditComment.cshtml" />
+    <Content Include="Views\ContentModerator\EditComment.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Nav\FilterContent.cshtml" />
     <Content Include="Views\User\AccountSettings.cshtml" />
     <Content Include="Views\User\AddRating.cshtml" />
-	<Content Include="Views\Account\LogIn.cshtml" />
+    <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\User\AddComment.cshtml" />
     <Content Include="Views\User\EditComment.cshtml" />
-	<Content Include="Views\UserModerator\EditComment.cshtml" />
+    <Content Include="Views\UserModerator\EditComment.cshtml" />
     <Content Include="Views\UserModerator\ViewBlacklist.cshtml" />
     <Content Include="Views\UserModerator\AddUserToBlacklist.cshtml" />
-
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
