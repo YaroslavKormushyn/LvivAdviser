@@ -12,7 +12,7 @@
         <h3>
             <strong>@p.Name</strong>
             <span class="pull-right label label-primary">
-                <a href="#">
+                <a href="@Url.Action("AddRating", "User", new { id = p.Id }, "http")">
                     <img src="~/Content/star.jpg" style="width:20px;height:25px;border:0"/>
                     @p.Rating
                 </a>

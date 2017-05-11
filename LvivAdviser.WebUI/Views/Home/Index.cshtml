@@ -26,17 +26,32 @@
                     
                 <div class="col-md-3">
                     <div class="tilt">
-                        @Html.ActionLink("Eat cheap - get cancer!", "ViewContent", "Content", null, null)
+                        @Html.ActionLink(
+                       "Eat cheap - get cancer!", 
+                       "ViewContent", 
+                       "Content", 
+                       new { type = "Food" }, 
+                       null)
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="tilt">
-                        @Html.ActionLink("Get relaxed and get bitches!", "ViewContent", "Content", null, null)
+                        @Html.ActionLink(
+                       "Get relaxed and get bitches!", 
+                       "ViewContent", 
+                       "Content", 
+                       new { type = "Rest" }, 
+                       null)
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="tilt">
-                        @Html.ActionLink("Spend time and get crippling depression!", "ViewContent", "Content", null, null)
+                        @Html.ActionLink(
+                       "Spend time and get crippling depression!", 
+                       "ViewContent", 
+                       "Content", 
+                       new { type = "FreeTime" }, 
+                       null)
                     </div>
                 </div>
             </div>

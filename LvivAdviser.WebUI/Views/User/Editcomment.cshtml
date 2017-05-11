@@ -1,0 +1,24 @@
+﻿@model LvivAdviser.WebUI.Models.CommentEditModel
+@{
+    ViewBag.Title = "Edit Comment";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        
+        <h2>Edit Comment</h2>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(Model.CommentId)
+        @Html.HiddenFor(Model.UserName)
+        <div class="panel-body">
+            @Html.TextAreaFor(Model.Comment, null)
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Index", null, 
+           new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
