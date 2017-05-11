@@ -15,10 +15,13 @@ namespace LvivAdviser.WebUI.Controllers
     {
 	    private readonly IRepository<Rating> _ratingRepository;
 
-	    public ModeratorController(IRepository<Rating> repository)
-	    {
-			_ratingRepository = repository;
-	    }
+	    private readonly IRepository<Content> _contentRepository;
+
+	    public ModeratorController(IRepository<Rating> repository, IRepository<Content> repo )
+		{
+		    _ratingRepository = repository;
+		    _contentRepository = repo;
+		}
 
 	    private AppUserManager UserManager
 		    => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
@@ -79,5 +82,50 @@ namespace LvivAdviser.WebUI.Controllers
 		    }
 		    return View(model);
 	    }
+	    
+	     public ViewResult Index()
+        {
+            return View(_contentRepository.GetAll());
+        }
+
+        public ViewResult EditContent(int Id)
+        {
+            Content content = _contentRepository.GetAll().FirstOrDefault(c => c.Id == Id);
+            return View(content);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrators")]
+        public ActionResult EditContent(Content content)
+        {
+            if (ModelState.IsValid)
+            {
+                _contentRepository.SaveContent(content);
+                TempData["message"] = $"{content.Name} has been saved";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // there is something wrong with the data values
+                return View(content);
+            }
+        }
+
+        public ViewResult CreateContent()
+        {
+            return View("EditContent", new Content());
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrators")]
+        public ActionResult DeleteContent(int id)
+        {
+            Content content = _contentRepository.DeleteContent(id);
+            if (content != null)
+            {
+                TempData["message"] = $"{content.Name} was deleted";
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
