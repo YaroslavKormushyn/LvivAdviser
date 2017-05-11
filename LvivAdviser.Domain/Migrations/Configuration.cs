@@ -139,8 +139,21 @@ namespace LvivAdviser.Domain.Migrations
 		        roleNames.ToList().Add(adminRole);
 	        }
 
-	        //Seed Roles
-	        foreach (var role in roleNames)
+            string userMoreratorRole = "UserModerators";
+
+            if (!roleNames.Contains(userMoreratorRole))
+            {
+                roleNames.ToList().Add(userMoreratorRole);
+            }
+
+            string contentModeratorRole = "ContentModerators";
+
+            if (!roleNames.Contains(contentModeratorRole))
+            {
+                roleNames.ToList().Add(contentModeratorRole);
+            }
+            //Seed Roles
+            foreach (var role in roleNames)
 	        {
 		        if (!roleMgr.RoleExists(role))
 		        {

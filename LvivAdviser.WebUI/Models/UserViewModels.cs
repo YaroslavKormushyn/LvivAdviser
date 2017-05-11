@@ -74,29 +74,4 @@ namespace LvivAdviser.WebUI.Models
         public string[] IdsToAdd { get; set; }
         public string[] IdsToDelete { get; set; }
     }
-
-	public class RatingEditModel
-	{
-		public int RatingId { get; set; }
-
-		public string UserId{ get; set; }
-		public int ContentId { get; set; }
-
-		[Required]
-		public int Rating { get; set; }
-
-		public string Comment { get; set; }
-	}
-
-	public class CommentEditModel
-	{
-		public string UserName { get; set; }
-
-        [Key]
-        [Required]
-		public int CommentId { get; set; }
-
-		public string Comment { get; set; }
-	}
-
 }
