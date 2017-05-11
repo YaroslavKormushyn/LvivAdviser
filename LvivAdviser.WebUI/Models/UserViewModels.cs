@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
 using LvivAdviser.Domain.Abstract;
@@ -90,8 +91,12 @@ namespace LvivAdviser.WebUI.Models
 	public class CommentEditModel
 	{
 		public string UserName { get; set; }
+
+        [Key]
+        [Required]
 		public int CommentId { get; set; }
 
 		public string Comment { get; set; }
 	}
+
 }

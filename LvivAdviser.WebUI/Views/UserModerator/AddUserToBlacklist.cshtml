@@ -1,0 +1,69 @@
+﻿@using LvivAdviser.Domain.Entities
+@using LvivAdviser.WebUI.Models
+
+@model AddToBlacklistModel
+@{
+    ViewBag.Title = "Add User To Blacklist";
+}
+
+@Html.ValidationSummary()
+@using (Html.BeginForm())
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">Add To Blacklist</div>
+        <div class="panel">
+            <input type="hidden" name="DateStart" value="@Model.DateStart" />
+            <label for="End">Time End: </label>
+            <input type="datetime" name="DateEnd" value="@Model.DateEnd" />
+            <br />
+            <label for="Reason">Reason</label>
+            <input type="text" name="Reason" value="@Model.Reason" />
+        </div>
+        <table class="table table-striped">
+            @if (Model.NotInBlacklist.Count() == 0)
+            {
+                <tr><td colspan="2">All Users Are In Blacklist</td></tr>
+            }
+            else
+            {
+                <tr><td>User ID</td><td>Add To Blacklist</td></tr>
+                foreach (User user in Model.NotInBlacklist)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <input type="radio" name="UserId" value="@user.Id">
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+
+    @*<div class="panel panel-primary">
+            <div class="panel-heading">Remove from @Model.Role.Name</div>
+            <table class="table table-striped">
+                @if (Model.Members.Count() == 0)
+                {
+                    <tr><td colspan="2">No Users Are Members</td></tr>
+                }
+                else
+                {
+                    <tr><td>User ID</td><td>Remove From Role</td></tr>
+                    foreach (User user in Model.Members)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>
+                                <input type="checkbox" name="IdsToDelete" value="@user.Id">
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>*@
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Cancel", "ViewBlacklist", null, new { @class = "btn btn-default" })
+}
+

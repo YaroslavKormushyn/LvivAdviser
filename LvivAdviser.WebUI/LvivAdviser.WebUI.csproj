@@ -197,12 +197,14 @@
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserModeratorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="Infrastructure\IdentityHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\BlacklistModels.cs" />
     <Compile Include="Models\ContentListViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\UserViewModels.cs" />
@@ -237,6 +239,9 @@
     <Content Include="Views\Nav\FilterContent.cshtml" />
     <Content Include="Views\User\AccountSettings.cshtml" />
     <Content Include="Views\User\AddRating.cshtml" />
+    <Content Include="Views\UserModerator\EditComment.cshtml" />
+    <Content Include="Views\UserModerator\ViewBlacklist.cshtml" />
+    <Content Include="Views\UserModerator\AddUserToBlacklist.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

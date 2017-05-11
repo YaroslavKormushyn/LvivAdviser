@@ -41,6 +41,9 @@ namespace LvivAdviser.WebUI.Infrastructure
 				.To<AppDbRepository<Rating>>()
 				.InRequestScope();
 
+            kernel.Bind<IRepository<Blacklist>>()
+                .To<AppDbRepository<Blacklist>>();
+
 			kernel.Bind<AppDbContext>()
 				.ToSelf()
 				.InRequestScope();

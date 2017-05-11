@@ -1,0 +1,44 @@
+﻿@using LvivAdviser.Domain.Entities
+@using LvivAdviser.WebUI.Infrastructure
+@model IEnumerable<Blacklist>
+@{ ViewBag.Title = "Blacklist"; }
+<div class="panel panel-primary">
+    <div class="panel-heading">Blacklist</div>
+    <table class="table table-striped">
+        <tr>
+        <th>ID</th>
+        <th>Date Start</th>
+        <th>Date End</th>
+        <th>User</th>
+        <th>Reason</th>
+        <th></th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+            <tr><td colspan="6" class="text-center">No Users In Blacklist</td></tr>
+        }
+        else
+        {
+            foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.DateStart</td>
+                    <td>@user.DateEnd</td>
+                    <td>@user.User.UserName</td>
+                    <td>@user.Reason</td>
+                    <td>
+                        @using (Html.BeginForm("Delete", "UserModerator",
+                    new { id = user.Id }))
+                        {
+                            <button class="btn btn-danger btn-xs" type="submit">
+                                Delete
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+@Html.ActionLink("Add", "AddUserToBlacklist", null, new { @class = "btn btn-primary" })

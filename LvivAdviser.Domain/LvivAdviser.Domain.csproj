@@ -108,6 +108,7 @@
     <Compile Include="Abstract\Interfaces\IRepository.cs" />
     <Compile Include="Abstract\AppDbRepository.cs" />
     <Compile Include="Abstract\Role.cs" />
+    <Compile Include="Entities\Blacklist.cs" />
     <Compile Include="Entities\Content.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="Entities\Rating.cs" />
@@ -131,6 +132,10 @@
     <Compile Include="Migrations\201704301838141_Favourites.cs" />
     <Compile Include="Migrations\201704301838141_Favourites.Designer.cs">
       <DependentUpon>201704301838141_Favourites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705111019150_Blacklist.cs" />
+    <Compile Include="Migrations\201705111019150_Blacklist.Designer.cs">
+      <DependentUpon>201705111019150_Blacklist.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -158,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704301838141_Favourites.resx">
       <DependentUpon>201704301838141_Favourites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705111019150_Blacklist.resx">
+      <DependentUpon>201705111019150_Blacklist.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

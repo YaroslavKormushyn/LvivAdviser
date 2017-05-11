@@ -13,6 +13,7 @@ namespace LvivAdviser.Domain.Abstract
 		public DbSet<Content> Contents { get; set; }
 		public DbSet<Rating> Ratings { get; set; }
 		public DbSet<Role> IdentityRoles { get; set; }
+        public DbSet<Blacklist> Blacklist { get; set; }
 	}
 }
 
