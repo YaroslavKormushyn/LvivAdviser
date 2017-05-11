@@ -29,6 +29,7 @@ namespace LvivAdviser.Domain.Entities
 		public byte[] MainPhoto { get; set; }
 
 		[NotMapped]
+		[HiddenInput(DisplayValue = false)]
 		public decimal Rating
 		{
 			get {
@@ -40,7 +41,8 @@ namespace LvivAdviser.Domain.Entities
 
 		[HiddenInput(DisplayValue = false)]
 		public virtual IEnumerable<Rating> Ratings { get; } = new List<Rating>();
-
+		
+		[HiddenInput(DisplayValue = false)]
 		public ICollection<User> FavouritedByUsers { get; set; } = new List<User>();
 	}
 }
