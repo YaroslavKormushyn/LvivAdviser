@@ -26,8 +26,7 @@ namespace LvivAdviser.UnitTests.Moderator
                 new Content { Id = 5, Name = "c5" }
             };
             mockContentRepository.Setup(x => x.GetAll()).Returns(arrayContent.AsQueryable());
-            Mock<IRepository<Rating>> mockRatingRepository = new Mock<IRepository<Rating>>();
-            ModeratorController target = new ModeratorController(mockRatingRepository.Object, mockContentRepository.Object);
+            ContentModeratorController target = new ContentModeratorController(mockContentRepository.Object);
             Content[] result = ((IEnumerable<Content>)target.Index().
             ViewData.Model).ToArray();
      
@@ -50,8 +49,7 @@ namespace LvivAdviser.UnitTests.Moderator
                 new Content { Id = 5, Name = "c5" }
             };
             mockContentRepository.Setup(x => x.GetAll()).Returns(arrayContent.AsQueryable());
-            Mock<IRepository<Rating>> mockRatingRepository = new Mock<IRepository<Rating>>();
-            ModeratorController target = new ModeratorController(mockRatingRepository.Object, mockContentRepository.Object);
+            ContentModeratorController target = new ContentModeratorController(mockContentRepository.Object);
 
             Content content1 = target.EditContent(1).ViewData.Model as Content;
             Content content2 = target.EditContent(2).ViewData.Model as Content;
@@ -74,8 +72,7 @@ namespace LvivAdviser.UnitTests.Moderator
                 new Content { Id = 5, Name = "c5" }
             };
             mockContentRepository.Setup(x => x.GetAll()).Returns(arrayContent.AsQueryable());
-            Mock<IRepository<Rating>> mockRatingRepository = new Mock<IRepository<Rating>>();
-            ModeratorController target = new ModeratorController(mockRatingRepository.Object, mockContentRepository.Object);
+            ContentModeratorController target = new ContentModeratorController(mockContentRepository.Object);
             // Act
             Content result = (Content)target.EditContent(6).ViewData.Model;
             // Assert
@@ -86,8 +83,7 @@ namespace LvivAdviser.UnitTests.Moderator
         public void Can_Save_Valid_Changes()
         {
             Mock<IRepository<Content>> mockContentRepository = new Mock<IRepository<Content>>();
-            Mock<IRepository<Rating>> mockRatingRepository = new Mock<IRepository<Rating>>();
-            ModeratorController target = new ModeratorController(mockRatingRepository.Object, mockContentRepository.Object);
+            ContentModeratorController target = new ContentModeratorController(mockContentRepository.Object);
             Content content = new Content { Name = "Test" };
             ActionResult result = target.EditContent(content);
             mockContentRepository.Verify(m => m.SaveContent(content));
@@ -99,8 +95,7 @@ namespace LvivAdviser.UnitTests.Moderator
         public void Cannot_Save_Invalid_Changes()
         {
             Mock<IRepository<Content>> mockContentRepository = new Mock<IRepository<Content>>();
-            Mock<IRepository<Rating>> mockRatingRepository = new Mock<IRepository<Rating>>();
-            ModeratorController target = new ModeratorController(mockRatingRepository.Object, mockContentRepository.Object);
+            ContentModeratorController target = new ContentModeratorController(mockContentRepository.Object);
             Content content = new Content { Name = "Test" };
             target.ModelState.AddModelError("error", "error");
             ActionResult result = target.EditContent(content);
@@ -120,11 +115,11 @@ namespace LvivAdviser.UnitTests.Moderator
                 new Content { Id = 3, Name = "c3" },
            };
             mockContentRepository.Setup(x => x.GetAll()).Returns(arrayContent.AsQueryable());
-            Mock<IRepository<Rating>> mockRatingRepository = new Mock<IRepository<Rating>>();
-            ModeratorController target = new ModeratorController(mockRatingRepository.Object, mockContentRepository.Object);
+            ContentModeratorController target = new ContentModeratorController(mockContentRepository.Object);
             target.DeleteContent(cont.Id);
 
             mockContentRepository.Verify(m => m.DeleteContent(cont.Id));
         }
     }
 }
+
