@@ -101,8 +101,14 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\RemoveCommentTests.cs" />
+    <Compile Include="User\EditCommentTests.cs" />
     <Compile Include="User\AddRatingTests.cs" />
     <Compile Include="User\AccountSettingsTests.cs" />
+    <Compile Include="User\AddToFavouritesTests.cs" />
+    <Compile Include="User\RemoveFromFavouritesTests.cs" />
+    <Compile Include="User\AddCommentTests.cs" />
+    <Compile Include="User\SetBudgetTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

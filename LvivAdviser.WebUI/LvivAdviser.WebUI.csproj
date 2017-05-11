@@ -238,6 +238,8 @@
     <Content Include="Views\User\AddRating.cshtml" />
     <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
+    <Content Include="Views\User\AddComment.cshtml" />
+    <Content Include="Views\User\EditComment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -6,6 +6,7 @@ using LvivAdviser.WebUI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace LvivAdviser.WebUI.Controllers
 			set => _userManager = value;
 		}
 
+		[ExcludeFromCodeCoverage]
 		[HttpGet]
         public ActionResult Index()
         {
@@ -168,34 +170,71 @@ namespace LvivAdviser.WebUI.Controllers
 			return RedirectToAction("ViewContent", "Content");
 		}
 
-		public ActionResult AddComment(int id, string comment)
+		[HttpGet]
+		public ViewResult AddComment(int id)
 		{
 			var rating = _ratings.GetById(id);
 			if (rating.UserId != User.Identity.GetUserId())
 			{
 				return View("_Error", new[] { "Cannot add comments from others." });
 			}
-			rating.Comment = comment;
+			
+			return View(new CommentEditModel
+			{
+				Comment = rating.Comment,
+				CommentId = rating.Id,
+				UserName = User.Identity.GetUserName()
+			});
+		}
+
+		[HttpPost]
+		public ActionResult AddComment(CommentEditModel model)
+		{
+			var rating = _ratings.GetById(model.CommentId);
+			if (rating.UserId != User.Identity.GetUserId())
+			{
+				return View("_Error", new[] { "Cannot add comments from others." });
+			}
+			rating.Comment = model.Comment;
 			_ratings.Update(rating);
 			_ratings.Save();
 
 			return RedirectToAction("Index", "Home");
 		}
 
-		public ActionResult EditComment(int id, string comment)
+		[HttpGet]
+		public ViewResult EditComment(int id)
 		{
 			var rating = _ratings.GetById(id);
 			if (rating.UserId != User.Identity.GetUserId())
 			{
 				return View("_Error", new[] { "Cannot edit comments from others." });
 			}
-			rating.Comment = comment;
+
+			return View(new CommentEditModel
+			{
+				Comment = rating.Comment,
+				CommentId = rating.Id,
+				UserName = User.Identity.GetUserName()
+			});
+		}
+
+		[HttpPost]
+		public ActionResult EditComment(CommentEditModel model)
+		{
+			var rating = _ratings.GetById(model.CommentId);
+			if (rating.UserId != User.Identity.GetUserId())
+			{
+				return View("_Error", new[] { "Cannot edit comments from others." });
+			}
+			rating.Comment = model.Comment;
 			_ratings.Update(rating);
 			_ratings.Save();
 
 			return RedirectToAction("Index", "Home");
 		}
 
+		[HttpPost]
 		public ActionResult RemoveComment(int id)
 		{
 			var rating = _ratings.GetById(id);
@@ -260,8 +299,15 @@ namespace LvivAdviser.WebUI.Controllers
 
 		public ActionResult SetBudget(decimal budget)
 		{
-			return null;
+			var currUser = UserManager.FindById(User.Identity.GetUserId());
+			currUser.Budget = budget;
 
+			var result = UserManager.Update(currUser);
+			if (!result.Succeeded)
+			{
+				return View("_Error", new[] {$"Cannot set budget of {budget}."});
+			}
+			return RedirectToAction("Index");
 		}
 
 		private void AddErrorsFromResult(IdentityResult result)

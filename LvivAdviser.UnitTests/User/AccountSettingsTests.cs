@@ -108,7 +108,7 @@ namespace LvivAdviser.UnitTests.User
 						.HashPassword(model.Password);
 					user.Budget = model.Budget;
 				})
-				.ReturnsAsync(new IdentityResult());
+				.ReturnsAsync(IdentityResult.Success);
 			var controllerContext = new Mock<ControllerContext>();
 			controllerContext.SetupGet(x => x.HttpContext.User)
 				.Returns(this.mockPrincipal.Object);
@@ -134,6 +134,182 @@ namespace LvivAdviser.UnitTests.User
 			userManager.Verify(r => r.FindByIdAsync(user.Id), Times.Once);
 			userManager.Verify(r => r.UpdateAsync(user), Times.Once);
 		}
+
+		[TestMethod]
+		public void SetAccountSettingsUpdateFailure()
+		{
+			var user = new Domain.Entities.User
+			{
+				Id = username,
+				Email = username,
+				UserName = username,
+				Budget = 100M,
+				PasswordHash = username
+			};
+
+			var model = new EditModel
+			{
+				Id = username,
+				Email = newUsername,
+				Name = newUsername,
+				Budget = 10M,
+				Password = newUsername
+			};
+
+			var userManager = new Mock<AppUserManager>(
+				new UserStore<Domain.Entities.User>());
+			userManager.Setup(m => m.FindByIdAsync(user.Id))
+				.ReturnsAsync(user);
+			userManager.Setup(m => m.UpdateAsync(user))
+				.Callback(() =>
+				{
+					user.UserName = model.Name;
+					user.Email = model.Email;
+					user.PasswordHash =
+						userManager.Object.PasswordHasher
+							.HashPassword(model.Password);
+					user.Budget = model.Budget;
+				})
+				.ReturnsAsync(IdentityResult.Failed(""));
+			var controllerContext = new Mock<ControllerContext>();
+			controllerContext.SetupGet(x => x.HttpContext.User)
+				.Returns(this.mockPrincipal.Object);
+
+			var userController
+				= new UserController(
+					null,
+					null)
+				{
+					ControllerContext = controllerContext.Object,
+					UserManager = userManager.Object
+				};
+			userController.Validate(model);
+			var viewResult = userController.AccountSettings(model);
+
+			Assert.AreEqual(model.Id, user.Id);
+			Assert.AreEqual(model.Name, user.UserName);
+			//Assert.AreEqual(userManager.Object.PasswordHasher
+			//	.HashPassword(model.Password), user.PasswordHash);
+			Assert.AreEqual(model.Email, user.Email);
+			Assert.AreEqual(model.Budget, user.Budget);
+
+			userManager.Verify(r => r.FindByIdAsync(user.Id), Times.Once);
+			userManager.Verify(r => r.UpdateAsync(user), Times.Once);
+		}
+
+		[TestMethod]
+		public void SetInvalidUserAccountSettings()
+		{
+			var user = new Domain.Entities.User
+			{
+				Id = username,
+				Email = username,
+				UserName = username,
+				Budget = 100M,
+				PasswordHash = username
+			};
+
+			var model = new EditModel
+			{
+				Id = username,
+				Email = "abc",
+				Name = ":",
+				Budget = 10M,
+				Password = newUsername
+			};
+
+			var userManager = new Mock<AppUserManager>(
+				new UserStore<Domain.Entities.User>());
+			userManager.Setup(m => m.FindByIdAsync(user.Id))
+				.ReturnsAsync(user);
+			userManager.Setup(m => m.UpdateAsync(user))
+				.Callback(() =>
+				{
+					user.UserName = model.Name;
+					user.Email = model.Email;
+					user.PasswordHash =
+						userManager.Object.PasswordHasher
+							.HashPassword(model.Password);
+					user.Budget = model.Budget;
+				})
+				.ReturnsAsync(new IdentityResult());
+			var controllerContext = new Mock<ControllerContext>();
+			controllerContext.SetupGet(x => x.HttpContext.User)
+				.Returns(this.mockPrincipal.Object);
+
+			var userController
+				= new UserController(
+					null,
+					null)
+				{
+					ControllerContext = controllerContext.Object,
+					UserManager = userManager.Object
+				};
+			userController.Validate(model);
+			var viewResult = userController.AccountSettings(model);
+			Assert.AreNotEqual(0, userController.ModelState.Count);
+			userManager.Verify(r => r.FindByIdAsync(user.Id), Times.Once);
+			userManager.Verify(r => r.UpdateAsync(user), Times.Never);
+		}
+
+		[TestMethod]
+		public void SetInvalidPasswordAccountSettings()
+		{
+			var user = new Domain.Entities.User
+			{
+				Id = username,
+				Email = username,
+				UserName = username,
+				Budget = 100M,
+				PasswordHash = username
+			};
+
+			var model = new EditModel
+			{
+				Id = username,
+				Email = newUsername,
+				Name = newUsername,
+				Budget = 10M,
+				Password = "12345"
+			};
+
+			var userManager = new Mock<AppUserManager>(
+				new UserStore<Domain.Entities.User>());
+			userManager.Setup(m => m.FindByIdAsync(user.Id))
+				.ReturnsAsync(user);
+			userManager.Setup(m => m.UpdateAsync(user))
+				.Callback(() =>
+				{
+					user.UserName = model.Name;
+					user.Email = model.Email;
+					user.PasswordHash =
+						userManager.Object.PasswordHasher
+							.HashPassword(model.Password);
+					user.Budget = model.Budget;
+				})
+				.ReturnsAsync(new IdentityResult());
+			var controllerContext = new Mock<ControllerContext>();
+			controllerContext.SetupGet(x => x.HttpContext.User)
+				.Returns(this.mockPrincipal.Object);
+
+			var userController
+				= new UserController(
+					null,
+					null)
+				{
+					ControllerContext = controllerContext.Object,
+					UserManager = userManager.Object
+				};
+			userController.Validate(model);
+			var viewResult = userController.AccountSettings(model);
+
+			Assert.AreNotEqual(0, userController.ModelState.Count);
+
+			userManager.Verify(r => r.FindByIdAsync(user.Id), Times.Once);
+			userManager.Verify(r => r.UpdateAsync(user), Times.Never);
+		}
+
+
 
 		[TestMethod]
 		public void SetInvalidAccountSettings()
