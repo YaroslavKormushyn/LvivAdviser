@@ -192,7 +192,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
-    <Compile Include="Controllers\ModeratorController.cs" />
+    <Compile Include="Controllers\ContentModeratorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
@@ -246,6 +246,9 @@
     <Content Include="Views\UserModerator\EditComment.cshtml" />
     <Content Include="Views\UserModerator\ViewBlacklist.cshtml" />
     <Content Include="Views\UserModerator\AddUserToBlacklist.cshtml" />
+    <Content Include="Views\ContentModerator\EditContent.cshtml" />
+    <Content Include="Views\ContentModerator\Index.cshtml" />
+    <Content Include="Views\Shared\_ContentModeratorLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -255,7 +258,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ContentModerator\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LvivAdviser.Domain\LvivAdviser.Domain.csproj">

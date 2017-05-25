@@ -24,9 +24,14 @@ namespace LvivAdviser.WebUI.Controllers
             _blacklistRepository = bl_repository;
         }
 
-        private AppUserManager UserManager
-            => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+        private AppUserManager _userManager;
 
+        public AppUserManager UserManager
+        {
+            get => _userManager ??
+                HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+            set => _userManager = value;
+        }
         //[ExcludeFromCodeCoverage]
         //public ActionResult Index()
         //{
@@ -99,7 +104,7 @@ namespace LvivAdviser.WebUI.Controllers
             return View(usersInBlackList);
         }
         
-        public async Task<ActionResult> AddUserToBlacklist()
+        public ViewResult AddUserToBlacklist()
         {
             string[] idsInBlacklist = _blacklistRepository.GetAll()
                 .Select(bl => bl.UserId).ToArray();
@@ -141,7 +146,7 @@ namespace LvivAdviser.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> RemoveFromBlacklist(int id)
         {
             Blacklist blacklist = _blacklistRepository.GetById(id);
             if (blacklist != null)

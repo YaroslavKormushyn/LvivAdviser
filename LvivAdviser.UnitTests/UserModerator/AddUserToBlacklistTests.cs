@@ -1,57 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Security.Principal;
-using System.Threading.Tasks;
+using System.Linq;
+using Moq;
+using System.Security.Claims;
+using LvivAdviser.WebUI.Models;
+using LvivAdviser.Domain.Entities;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using LvivAdviser.Domain.Abstract.Interfaces;
-using LvivAdviser.Domain.Entities;
 using LvivAdviser.WebUI.Controllers;
-using LvivAdviser.WebUI.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+using LvivAdviser.Domain.Abstract;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LvivAdviser.UnitTests.UserModerator
 {
-    class AddUserToBlacklistTests
+    [TestClass]
+    public class AddUserToBlacklistTests
     {
         private Mock<IPrincipal> mockPrincipal;
         private string username = "test@example.com";
         private string otherUsername = "test1@example.com";
-
-        [TestInitialize]
-        public void Init()
-        {
-            this.mockPrincipal = new Mock<IPrincipal>();
-            var identity = new GenericIdentity(this.username);
-            var nameIdentifierClaim = new Claim(
-                ClaimTypes.NameIdentifier, this.username);
-            identity.AddClaim(nameIdentifierClaim);
-            this.mockPrincipal.Setup(x => x.Identity).Returns(identity);
-        }
 
         [TestMethod]
         public void AddUserToBlackList()
         {
             var start = new DateTime();
 
-            var end = start.Add(new TimeSpan(1, 0, 0));
+            var end = start.AddHours(1);
 
-            var reason = "";
-
-            var content = new Content
-            {
-                Id = 1
-            };
-
-            var model = new AddToBlacklistModel
-            {
-                DateStart = start,
-                DateEnd = end,
-                Reason = reason,
-                UserId = username
-            };
+            var reason = "a";
 
             var blacklist = new List<Blacklist>
             {
@@ -65,63 +43,57 @@ namespace LvivAdviser.UnitTests.UserModerator
                 }
             };
 
-            Mock<ControllerContext> context
-                = new Mock<ControllerContext>();
-            context.SetupGet(x => x.HttpContext.User)
-                .Returns(mockPrincipal.Object);
-
             Mock<IRepository<Blacklist>> mockBlacklistRepository
                 = new Mock<IRepository<Blacklist>>();
             mockBlacklistRepository
-                .Setup(x => x.GetById(content.Id))
-                .Returns(blacklist.First);
+                .Setup(x => x.GetAll())
+                .Returns(blacklist.AsQueryable());
+
+            var userManager = new Mock<AppUserManager>(
+                new UserStore<Domain.Entities.User>());
+            var users = new List<Domain.Entities.User>
+            {
+                new Domain.Entities.User{ Id = username },
+                new Domain.Entities.User{ Id = otherUsername }
+            };
+
+            userManager.Setup(x => x.Users).Returns(users.AsQueryable());
 
             var userModeratorController
                 = new UserModeratorController(
                     null,
                     mockBlacklistRepository.Object)
                 {
-                    ControllerContext = context.Object
+                    UserManager = userManager.Object
                 };
-            var viewResult = userModeratorController.AddUserToBlacklist();
-
-            Assert.AreEqual(
-                model.DateStart,
-                ((AddToBlacklistModel)viewResult.AsyncState).DateStart);
-            Assert.AreEqual(
-                model.DateEnd,
-                ((AddToBlacklistModel)viewResult.AsyncState).DateEnd);
-            Assert.AreEqual(
-                model.Reason,
-                ((AddToBlacklistModel)viewResult.AsyncState).Reason);
-            Assert.AreEqual(
-                model.UserId,
-                ((AddToBlacklistModel)viewResult.AsyncState).UserId);
-
-            mockBlacklistRepository.Verify(r => r.GetById(content.Id), Times.Once);
-        }
-
-        [TestMethod]
-        public void AddInvalidIdentityUserToBlacklist()
-        {
-            var start = new DateTime();
-
-            var end = start.Add(new TimeSpan(1, 0, 0));
-
-            var reason = "";
-
-            var content = new Content
-            {
-                Id = 1
-            };
 
             var model = new AddToBlacklistModel
             {
-                DateStart = start,
-                DateEnd = end,
-                Reason = reason,
-                UserId = username
+                DateStart = DateTime.Now,
+                DateEnd = DateTime.Now.AddHours(1),
+                NotInBlacklist = users.Where(x => x.Id != username)
             };
+
+            var viewResult = userModeratorController.AddUserToBlacklist();
+
+            Assert.AreEqual(
+                model.NotInBlacklist.Count(),
+                ((AddToBlacklistModel)viewResult.Model).NotInBlacklist.Count());
+            Assert.AreEqual(
+                model.NotInBlacklist.Single(),
+                ((AddToBlacklistModel)viewResult.Model).NotInBlacklist.Single());
+
+            mockBlacklistRepository.Verify(r => r.GetAll(), Times.Once);
+        }
+
+        [TestMethod]
+        public void AddBlacklistedUserToBlackList()
+        {
+            var start = new DateTime();
+
+            var end = start.AddHours(1);
+
+            var reason = "a";
 
             var blacklist = new List<Blacklist>
             {
@@ -131,36 +103,53 @@ namespace LvivAdviser.UnitTests.UserModerator
                     DateStart = start,
                     DateEnd = end,
                     Reason = reason,
-                    UserId = otherUsername
+                    UserId = username
                 }
             };
-            
-            Mock<ControllerContext> context
-                = new Mock<ControllerContext>();
-            context.SetupGet(x => x.HttpContext.User)
-                .Returns(mockPrincipal.Object);
 
             Mock<IRepository<Blacklist>> mockBlacklistRepository
                 = new Mock<IRepository<Blacklist>>();
             mockBlacklistRepository
-                .Setup(x => x.GetById(content.Id))
-                .Returns(blacklist.First);
+                .Setup(x => x.GetAll())
+                .Returns(blacklist.AsQueryable());
+
+            var userManager = new Mock<AppUserManager>(
+                new UserStore<Domain.Entities.User>());
+            var users = new List<Domain.Entities.User>
+            {
+                new Domain.Entities.User{ Id = username },
+                new Domain.Entities.User{ Id = otherUsername }
+            };
+
+            userManager.Setup(x => x.Users).Returns(users.AsQueryable());
 
             var userModeratorController
                 = new UserModeratorController(
                     null,
                     mockBlacklistRepository.Object)
                 {
-                    ControllerContext = context.Object
+                    UserManager = userManager.Object
                 };
+
+
+
+            var model = new AddToBlacklistModel
+            {
+                DateStart = DateTime.Now,
+                DateEnd = DateTime.Now.AddHours(1),
+                NotInBlacklist = users.Where(x => x.Id != username)
+            };
 
             var viewResult = userModeratorController.AddUserToBlacklist();
 
             Assert.AreEqual(
-                "Cannot add comments from others.",
-                ((string[])viewResult.AsyncState).Single());
+                model.NotInBlacklist.Count(),
+                ((AddToBlacklistModel)viewResult.Model).NotInBlacklist.Count());
+            Assert.AreEqual(
+                model.NotInBlacklist.Single(),
+                ((AddToBlacklistModel)viewResult.Model).NotInBlacklist.Single());
 
-            mockBlacklistRepository.Verify(r => r.GetById(content.Id), Times.Once);
-        }             
+            mockBlacklistRepository.Verify(r => r.GetAll(), Times.Once);
+        }
     }
 }
